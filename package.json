@@ -10,7 +10,10 @@
   "scripts": {
     "react-dev": "webpack -d --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  },
   "devDependencies": {
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
