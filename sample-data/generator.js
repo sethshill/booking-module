@@ -1,3 +1,5 @@
+const insertHelpers = require('./insert-helpers');
+
 // helpers
 const getRandomInt = function getRandomIntegerBetweenValues(min, max) {
   return Math.floor(Math.random() * ((max - min) + 1)) + min;
@@ -88,3 +90,6 @@ for (let i = 0; i < 100; i += 1) {
     nextDate.setDate(nextDate.getDate() + getRandomInt(0, 50));
   }
 }
+
+// insert into database
+listings.forEach(listing => insertHelpers.insertListing(listing));
