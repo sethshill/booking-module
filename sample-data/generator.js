@@ -9,6 +9,18 @@ const getRandomDecimal = function getRandomDecimalBetweenValues(min, max, decima
   return Math.floor(rand * power) / power;
 };
 
+const getRandomPosNeg = function getRandomPositiveOrNegative() {
+  return Math.random() >= 0.5 ? 1 : -1;
+};
+
+const getDateString = function getDateStringForSQLInsertion(date) {
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+};
+
 
 // listings
 const listings = [];
@@ -16,8 +28,7 @@ for (let i = 0; i < 100; i += 1) {
   const row = [];
 
   row.push(i + 1); // index
-  row.push(getRandomInt(45, 550)); // average_cost_per_night
-  row.push('');// averate_rating -- calculate from daily prices
+  row.push(getRandomDecimal(2, 5, 1)); // average_rating
   row.push(getRandomInt(2, 20)); // max_adults
   row.push(getRandomInt(2, 6)); // max_children
   row.push(getRandomInt(2, 6)); // max_infants
@@ -26,47 +37,54 @@ for (let i = 0; i < 100; i += 1) {
   row.push(getRandomDecimal(0, 0.4, 2)); // occ_tac_rate_perc
   row.push(getRandomInt(0, 50)); // additional_guest_fee
 
-  listings[i] = row;
+  listings.push(row);
 }
 
 // reservations
 const reservations = [];
+const startDate = new Date(2018, 6, 15);
+
 let rowNum = 1;
+
 for (let i = 0; i < 100; i += 1) {
   const reservationsForListing = getRandomInt(10, 50);
+  const nextReservation = new Date(startDate);
+  nextReservation.setDate(startDate.getDate() + getRandomInt(0, 10));
 
   for (let j = 0; j < reservationsForListing; j += 1) {
-    const row = [];
+    const endOfReservation = new Date(nextReservation);
+    endOfReservation.setDate(nextReservation.getDate() + getRandomInt(1, 10));
 
-    row.push(rowNum); // index
-    row.push(i + 1); // listing_id
-    row.push(); // start_date
-    row.push(); // end_date
+    const row = [rowNum, i + 1, getDateString(nextReservation), getDateString(endOfReservation)];
+    reservations.push(row);
 
-    reservations[i] = row;
     rowNum += 1;
+    nextReservation.setDate(endOfReservation.getDate() + getRandomInt(0, 10));
   }
 }
 
 // daily prices
 const dailyPrices = [];
+const priceStartDate = new Date(2018, 6, 1);
 rowNum = 1;
+
 for (let i = 0; i < 100; i += 1) {
   const priceChangesForListing = getRandomInt(0, 10);
+  const nextDate = new Date(priceStartDate);
+  let nextPrice = getRandomInt(45, 500);
 
-  for (let j = 0; j < priceChangesForListing; i += 1) {
+  for (let j = 0; j < priceChangesForListing; j += 1) {
     const row = [];
+
 
     row.push(rowNum); // index
     row.push(i + 1); // listing_id
-    row.push(); // cost_per_night
-    row.push(); // start_date
-    row.push(); // end_date
+    row.push(nextPrice); // cost_per_night
+    row.push(getDateString(nextDate)); // start_date
 
-    dailyPrices[i] = row;
+    dailyPrices.push(row);
     rowNum += 1;
+    nextPrice += getRandomInt(0, 50) * getRandomPosNeg();
+    nextDate.setDate(nextDate.getDate() + getRandomInt(0, 50));
   }
 }
-
-
-// load into database
