@@ -28,6 +28,5 @@ CREATE TABLE listing_daily_costs (
   id int PRIMARY KEY,
   listing_id int NOT NULL,
   cost_per_night decimal(10, 2) NOT NULL,
-  start_date date NOT NULL,
-  end_date date NOT NULL
+  start_date date NOT NULL
 );
