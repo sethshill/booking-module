@@ -17,7 +17,7 @@ for (let i = 0; i < 100; i += 1) {
 
   row.push(i + 1); // index
   row.push(getRandomInt(45, 550)); // average_cost_per_night
-  row.push(getRandomDecimal(3, 5, 1)); // averate_rating
+  row.push('');// averate_rating -- calculate from daily prices
   row.push(getRandomInt(2, 20)); // max_adults
   row.push(getRandomInt(2, 6)); // max_children
   row.push(getRandomInt(2, 6)); // max_infants
