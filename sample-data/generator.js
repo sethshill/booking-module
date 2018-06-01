@@ -17,14 +17,14 @@ const getRandomPosNeg = function getRandomPositiveOrNegative() {
 
 const getDateString = function getDateStringForSQLInsertion(date) {
   const day = date.getDate();
-  const month = date.getMonth();
+  const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
   return `${month}/${day}/${year}`;
 };
 
 
-// listings
+// generating listings
 const listings = [];
 for (let i = 0; i < 100; i += 1) {
   const row = [];
@@ -42,7 +42,7 @@ for (let i = 0; i < 100; i += 1) {
   listings.push(row);
 }
 
-// reservations
+// generate reservations
 const reservations = [];
 const startDate = new Date(2018, 6, 15);
 
@@ -65,7 +65,7 @@ for (let i = 0; i < 100; i += 1) {
   }
 }
 
-// daily prices
+// generate daily prices
 const dailyPrices = [];
 const priceStartDate = new Date(2018, 6, 1);
 rowNum = 1;
@@ -78,7 +78,6 @@ for (let i = 0; i < 100; i += 1) {
   for (let j = 0; j < priceChangesForListing; j += 1) {
     const row = [];
 
-
     row.push(rowNum); // index
     row.push(i + 1); // listing_id
     row.push(nextPrice); // cost_per_night
@@ -86,10 +85,22 @@ for (let i = 0; i < 100; i += 1) {
 
     dailyPrices.push(row);
     rowNum += 1;
-    nextPrice += getRandomInt(0, 50) * getRandomPosNeg();
+
+    const potentialNextPrice = nextPrice + (getRandomInt(0, 50) * getRandomPosNeg());
+    nextPrice = potentialNextPrice > 45 ? potentialNextPrice : 45;
     nextDate.setDate(nextDate.getDate() + getRandomInt(0, 50));
   }
 }
 
 // insert into database
 listings.forEach(listing => insertHelpers.insertListing(listing));
+console.log(`${listings.length} listings loaded!`);
+
+reservations.forEach(reservation => insertHelpers.insertReservation(reservation));
+console.log(`${reservations.length} reservations loaded!`);
+
+dailyPrices.forEach(price => insertHelpers.insertPrice(price));
+console.log(`${dailyPrices.length} daily prices loaded!`);
+
+console.log('all sample data generated');
+

@@ -1,4 +1,4 @@
-#run: mysql -u root < schema.sql
+#run: mysql -u root < sample-data/schema.sql
 
 DROP DATABASE IF EXISTS project_nomad_booking;
 CREATE DATABASE project_nomad_booking;
@@ -24,7 +24,7 @@ CREATE TABLE reservations (
   end_date date NOT NULL
 );
 
-CREATE TABLE listing_daily_costs (
+CREATE TABLE listing_daily_prices (
   id int PRIMARY KEY,
   listing_id int NOT NULL,
   cost_per_night decimal(10, 2) NOT NULL,
