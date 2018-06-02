@@ -1,4 +1,4 @@
-#run: mysql -u root < schema.sql
+#run: mysql -u root < sample-data/schema.sql
 
 DROP DATABASE IF EXISTS project_nomad_booking;
 CREATE DATABASE project_nomad_booking;
@@ -7,15 +7,14 @@ USE project_nomad_booking;
 
 CREATE TABLE listings (
   id int PRIMARY KEY,
-  avg_cost_per_night decimal(10, 2) NOT NULL,
   avg_rating decimal (3, 2),
   max_adults int NOT NULL,
   max_children int NOT NULL,
   max_infants int NOT NULL,
-  cleaning_fee decimal(10,2) NOT NULL,
+  cleaning_fee decimal (10, 2) NOT NULL,
   service_fee_perc decimal (3, 2) NOT NULL,
   occ_tax_rate_perc decimal (3, 2) NOT NULL,
-  additional_guest_fee decimal(10,2) NOT NULL
+  additional_guest_fee decimal(10, 2) NOT NULL
 );
 
 CREATE TABLE reservations (
@@ -25,10 +24,9 @@ CREATE TABLE reservations (
   end_date date NOT NULL
 );
 
-CREATE TABLE listing_daily_costs (
+CREATE TABLE listing_daily_prices (
   id int PRIMARY KEY,
   listing_id int NOT NULL,
-  cost_per_night decimal(10,2) NOT NULL,
-  start_date date NOT NULL,
-  end_date date NOT NULL
+  cost_per_night decimal(10, 2) NOT NULL,
+  start_date date NOT NULL
 );
