@@ -7,7 +7,9 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      hi: '',
+      costPerNight: 0,
+      totalReviews: 0,
+      rating: 0,
     };
   }
 
@@ -17,18 +19,24 @@ class App extends React.Component {
 
   getCoreData() {
     axios.get('/booking/core/listingId/1')
-      .then(response => console.log(response.data[0]))
+      .then((response) => {
+        this.setState({
+          costPerNight: response.data[0].avg_cost_per_night,
+          totalReviews: response.data[0].review_count,
+          rating: response.data[0].avg_rating,
+        });
+      })
       .catch(error => console.log(error));
-
-    this.setState({
-      hi: 'hello',
-    });
   }
 
 
   render() {
     return (
-      <div id="app">{this.state.hi}</div>
+      <div id="app">
+        <div id="cost-per-night">{this.state.costPerNight}</div>
+        <div id="total-reviews">{this.state.totalReviews}</div>
+        <div id="rating">{this.state.rating}</div>
+      </div>
     );
   }
 }
