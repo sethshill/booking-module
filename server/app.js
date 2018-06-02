@@ -11,7 +11,7 @@ app.get('/booking/core/listingId/:listingId', (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      res.send(results);
+      res.status(200).send(results);
     }
   });
 });
@@ -22,7 +22,7 @@ app.get('/booking/availability/listingId/:listingId', (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      res.send(results);
+      res.status(200).send(results);
     }
   });
 });
@@ -33,7 +33,7 @@ app.get('/booking/pricing/listingId/:listingId', (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      res.send(results);
+      res.status(200).send(results);
     }
   });
 });
