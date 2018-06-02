@@ -1,3 +1,4 @@
+// run: node sample-data/generator.js
 const insertHelpers = require('./insert-helpers');
 
 // helpers
@@ -31,6 +32,7 @@ for (let i = 0; i < 100; i += 1) {
 
   row.push(i + 1); // index
   row.push(getRandomDecimal(2, 5, 1)); // average_rating
+  row.push(getRandomInt(10, 500)); // review_count
   row.push(getRandomInt(2, 20)); // max_adults
   row.push(getRandomInt(2, 6)); // max_children
   row.push(getRandomInt(2, 6)); // max_infants
