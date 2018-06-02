@@ -7,14 +7,32 @@ const app = express();
 app.use(express.static(path.join(__dirname, '/../public')));
 
 app.get('/booking/core/listingId/:listingId', (req, res) => {
-  db.getCoreData(req.params.listingId, () => {
-    res.send();
+  db.getCoreData(req.params.listingId, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(results);
+    }
   });
 });
 
 app.get('/booking/availability/listingId/:listingId', (req, res) => {
-  db.getReservationData(req.params.listingId, () => {
-    res.send();
+  db.getReservationData(req.params.listingId, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(results);
+    }
+  });
+});
+
+app.get('/booking/pricing/listingId/:listingId', (req, res) => {
+  db.getPricingData(req.params.listingId, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(results);
+    }
   });
 });
 

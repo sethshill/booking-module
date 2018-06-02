@@ -20,4 +20,26 @@ module.exports.getCoreData = function getBaseDataForListing(listingId, callback)
   });
 };
 
-module.exports.getReservationData
+module.exports.getReservationData = function getReservationDataForDateRange(listingId, callback) {
+  const query = `SELECT id, start_date, end_date FROM reservations WHERE listing_id = ${listingId}`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+module.exports.getPricingData = function getPricingDataForDateRange(listingId, callback) {
+  const query = `SELECT id, start_date, cost_per_night FROM listing_daily_prices WHERE listing_id = ${listingId}`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
