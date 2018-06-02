@@ -35,16 +35,32 @@ module.exports.getReservationData = function getReservationDataForDateRange(list
   });
 };
 
-module.exports.getPricingData = function getPricingDataForDateRange(listingId, startDate, endDate, callback) {
-  const query = `SELECT id, start_date, cost_per_night FROM listing_daily_prices
-  WHERE listing_id = ${listingId}
-  AND start_date BETWEEN '${startDate}' AND '${endDate}';`;
+const getMaxPrice = function getMaxPrice(listingId, callback) {
+  const maxQuery = `SELECT id, start_date, cost_per_night FROM listing_daily_prices WHERE listing_id = ${listingId} ORDER BY start_date DESC LIMIT 1;`;
 
-  connection.query(query, (err, results) => {
+  connection.query(maxQuery, (err, results) => {
     if (err) {
       callback(err, null);
     } else {
       callback(null, results);
+    }
+  });
+};
+
+module.exports.getPricingData = function getPricingDataForDateRange(listingId, startDate, endDate, callback) {
+  const query = `SELECT id, start_date, cost_per_night FROM listing_daily_prices
+    WHERE listing_id = ${listingId}
+    AND start_date BETWEEN '${startDate}' AND '${endDate}';`;
+
+  connection.query(query, (err, results) => {
+    console.log(results);
+
+    if (err) {
+      callback(err, null);
+    } else if (results.length > 0) {
+      callback(null, results);
+    } else { // if no results in date range, just get most recent price
+      getMaxPrice(listingId, callback);
     }
   });
 };
