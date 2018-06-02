@@ -33,9 +33,17 @@ class App extends React.Component {
   render() {
     return (
       <div id="app">
-        <div id="cost-per-night">{this.state.costPerNight}</div>
-        <div id="total-reviews">{this.state.totalReviews}</div>
-        <div id="rating">{this.state.rating}</div>
+        <div id="summary-header">
+          <div id="cost-per-night">${this.state.costPerNight} per night</div>
+          <div id="rating">{this.state.rating} stars</div>
+          <div id="total-reviews">{this.state.totalReviews} reviews</div>
+        </div>
+        {/* Dates Component */}
+        {/* Guests Component */}
+        <div id="book">
+          <button>Book</button>
+          You won&#39;t be charged yet
+        </div>
       </div>
     );
   }
