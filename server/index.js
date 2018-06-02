@@ -16,8 +16,9 @@ app.get('/booking/core/listingId/:listingId', (req, res) => {
   });
 });
 
+// structure: http://localhost:3001/booking/availability/listingid/3?start_date=01-01-2018&end_date=02-28-2018
 app.get('/booking/availability/listingId/:listingId', (req, res) => {
-  db.getReservationData(req.params.listingId, (err, results) => {
+  db.getReservationData(req.params.listingId, req.query.start_date, req.query.end_date, (err, results) => {
     if (err) {
       res.send(err);
     } else {
@@ -26,8 +27,9 @@ app.get('/booking/availability/listingId/:listingId', (req, res) => {
   });
 });
 
+// structure: http://localhost:3001/booking/pricing/listingid/3?start_date=01-01-2018&end_date=02-28-2018
 app.get('/booking/pricing/listingId/:listingId', (req, res) => {
-  db.getPricingData(req.params.listingId, (err, results) => {
+  db.getPricingData(req.params.listingId, req.query.start_date, req.query.end_date, (err, results) => {
     if (err) {
       res.send(err);
     } else {
