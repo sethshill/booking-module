@@ -8,6 +8,7 @@ USE project_nomad_booking;
 CREATE TABLE listings (
   id int PRIMARY KEY,
   avg_rating decimal (3, 2),
+  review_count int NOT NULL,
   max_adults int NOT NULL,
   max_children int NOT NULL,
   max_infants int NOT NULL,
