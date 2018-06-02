@@ -21,7 +21,8 @@ module.exports.getCoreData = function getBaseDataForListing(listingId, callback)
 };
 
 module.exports.getReservationData = function getReservationDataForDateRange(listingId, startDate, endDate, callback) {
-  const query = `SELECT id, start_date, end_date FROM reservations
+  const query = `SELECT id, start_date, end_date
+    FROM reservations
     WHERE listing_id = ${listingId}
     AND (start_date BETWEEN '${startDate}' AND '${endDate}'
     OR end_date BETWEEN '${startDate}' AND '${endDate}');`;
@@ -36,7 +37,10 @@ module.exports.getReservationData = function getReservationDataForDateRange(list
 };
 
 const getMaxPrice = function getMaxPrice(listingId, callback) {
-  const maxQuery = `SELECT id, start_date, cost_per_night FROM listing_daily_prices WHERE listing_id = ${listingId} ORDER BY start_date DESC LIMIT 1;`;
+  const maxQuery = `SELECT id, start_date, cost_per_night
+    FROM listing_daily_prices
+    WHERE listing_id = ${listingId}
+    ORDER BY start_date DESC LIMIT 1;`;
 
   connection.query(maxQuery, (err, results) => {
     if (err) {
@@ -48,7 +52,8 @@ const getMaxPrice = function getMaxPrice(listingId, callback) {
 };
 
 module.exports.getPricingData = function getPricingDataForDateRange(listingId, startDate, endDate, callback) {
-  const query = `SELECT id, start_date, cost_per_night FROM listing_daily_prices
+  const query = `SELECT id, start_date, cost_per_night
+    FROM listing_daily_prices
     WHERE listing_id = ${listingId}
     AND start_date BETWEEN '${startDate}' AND '${endDate}';`;
 
