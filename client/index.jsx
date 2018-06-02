@@ -20,10 +20,11 @@ class App extends React.Component {
   getCoreData() {
     axios.get('/booking/core/listingId/1')
       .then((response) => {
+        const listing = response.data[0];
         this.setState({
-          costPerNight: response.data[0].avg_cost_per_night,
-          totalReviews: response.data[0].review_count,
-          rating: response.data[0].avg_rating,
+          costPerNight: listing.avg_cost_per_night,
+          totalReviews: listing.review_count,
+          rating: listing.avg_rating,
         });
       })
       .catch(error => console.log(error));
