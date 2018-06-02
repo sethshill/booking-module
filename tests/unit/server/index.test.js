@@ -111,8 +111,55 @@ describe('Test GET /booking/availability/', () => {
       done();
     });
   });
+
+  test('It should send body containing 0 or more reservations', (done) => {
+    request(app).get('/booking/availability/listingid/3?start_date=2018-07-01&end_date=2018-09-28').then((response) => {
+      expect(response.body.length).toBeGreaterThanOrEqual(0);
+      done();
+    });
+  });
 });
 
 describe('Test GET /booking/pricing/', () => {
+  test('It should response to the GET method', (done) => {
+    request(app).get('/booking/pricing/listingid/3?start_date=2018-07-01&end_date=2018-09-28').then((response) => {
+      expect(response.statusCode).toBe(200);
+      done();
+    });
+  });
 
+  test('It should send body containing at least one price', (done) => {
+    request(app).get('/booking/pricing/listingid/3?start_date=2018-07-01&end_date=2018-09-28').then((response) => {
+      expect(response.body.length).toBeGreaterThanOrEqual(1);
+      done();
+    });
+  });
+
+  test('It should send the most recent price for dates far in the future', (done) => {
+    request(app).get('/booking/pricing/listingid/3?start_date=2020-07-01&end_date=2020-09-28').then((response) => {
+      expect(response.body.length).toBeGreaterThanOrEqual(1);
+      done();
+    });
+  });
+
+  test('It should send id', (done) => {
+    request(app).get('/booking/pricing/listingid/3?start_date=2018-07-01&end_date=2018-09-28').then((response) => {
+      expect(typeof response.body[0].id).toBe('number');
+      done();
+    });
+  });
+
+  test('It should send a start_date', (done) => {
+    request(app).get('/booking/pricing/listingid/3?start_date=2018-07-01&end_date=2018-09-28').then((response) => {
+      expect(typeof response.body[0].start_date).toBe('string');
+      done();
+    });
+  });
+
+  test('It should send a start_date', (done) => {
+    request(app).get('/booking/pricing/listingid/3?start_date=2018-07-01&end_date=2018-09-28').then((response) => {
+      expect(typeof response.body[0].cost_per_night).toBe('number');
+      done();
+    });
+  });
 });
