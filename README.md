@@ -1,13 +1,12 @@
-# Project Name
+# Project Nomad: Booking Module
 
-> Project description
+> A recreation of AirBnb's booking module, made with React, Express, & MySQL.
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/project-nomad/review-module
+  - https://github.com/project-nomad/listing-description-module
+  - https://github.com/project-nomad/image-carousel-module
 
 ## Table of Contents
 
@@ -16,7 +15,7 @@
 1. [Development](#development)
 
 ## Usage
-
+s
 > Some usage instructions
 
 ## Requirements
@@ -36,4 +35,3 @@ From within the root directory:
 npm install -g webpack
 npm install
 ```
-
