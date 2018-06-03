@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import PricePerNight from './components/PricePerNight.jsx';
 import Rating from './components/Rating.jsx';
+import Dates from './components/Dates.jsx';
 import BookButton from './components/BookButton.jsx';
 
 const OuterDiv = styled.div`
@@ -46,7 +47,6 @@ class App extends React.Component {
     this.getCoreData();
   }
 
-
   getCoreData() {
     axios.get('/booking/core/listingId/1')
       .then((response) => {
@@ -70,7 +70,7 @@ class App extends React.Component {
             <Rating rating={this.state.rating} totalReviews={this.state.totalReviews} />
           </div>
           <MarginLine />
-          {/* Dates Component */}
+          <Dates />
           {/* Guests Component */}
           <BookButton />
         </MainDiv>
