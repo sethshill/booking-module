@@ -1,6 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 import axios from 'axios';
+import PricePerNight from './components/PricePerNight.jsx';
+import Rating from './components/Rating.jsx';
+import BookButton from './components/BookButton.jsx';
+
+const OuterDiv = styled.div`
+  width: 376px;
+  margin-left: 45px;
+  font-size: 14px;
+  line-height; 1.43;
+  color: #484848;
+`;
+
+const MainDiv = styled.div`
+  display: block;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin: 16px 0px 24px 0px;
+  border: 1px solid #e4e4e4;
+  background-color: #ffffff;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  -webkit-font-smoothing: antialiased;
+`;
+
+const MarginLine = styled.div`
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #DBDBDB;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +45,7 @@ class App extends React.Component {
   componentDidMount() {
     this.getCoreData();
   }
+
 
   getCoreData() {
     axios.get('/booking/core/listingId/1')
@@ -33,19 +63,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <div id="app">
-        <div id="summary-header">
-          <div id="cost-per-night">${this.state.costPerNight} per night</div>
-          <div id="rating">{this.state.rating} stars</div>
-          <div id="total-reviews">{this.state.totalReviews} reviews</div>
-        </div>
-        {/* Dates Component */}
-        {/* Guests Component */}
-        <div id="book">
-          <button>Book</button>
-          You won&#39;t be charged yet
-        </div>
-      </div>
+      <OuterDiv>
+        <MainDiv id="app">
+          <div id="summary-header">
+            <PricePerNight costPerNight={this.state.costPerNight} />
+            <Rating rating={this.state.rating} totalReviews={this.state.totalReviews} />
+          </div>
+          <MarginLine />
+          {/* Dates Component */}
+          {/* Guests Component */}
+          <BookButton />
+        </MainDiv>
+      </OuterDiv>
     );
   }
 }
