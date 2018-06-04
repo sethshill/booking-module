@@ -46,7 +46,7 @@ class App extends React.Component {
   }
 
   getCoreData() {
-    axios.get('/booking/core/listingId/1')
+    axios.get('/booking/core/listingId/2')
       .then((response) => {
         const listing = response.data[0];
         this.setState({
