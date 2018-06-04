@@ -12,13 +12,8 @@ const ReviewCount = styled.span`
 
 const Rating = props => (
   <div>
-    <span>{props.rating}</span>
     <span>
-      <Star fill="1" />
-      <Star fill="1" />
-      <Star fill="1" />
-      <Star fill=".5" />
-      <Star fill="0" />
+      {props.stars.map((star, index) => <Star fill={star} key={index} />)}
     </span>
     <ReviewCount>{props.totalReviews}</ReviewCount>
   </div>

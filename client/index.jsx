@@ -37,6 +37,7 @@ class App extends React.Component {
       costPerNight: 0,
       totalReviews: 0,
       rating: 0,
+      stars: [],
     };
   }
 
@@ -52,11 +53,34 @@ class App extends React.Component {
           costPerNight: listing.avg_cost_per_night,
           totalReviews: listing.review_count,
           rating: listing.avg_rating,
-        });
+        }, this.getStarArray);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error)); // TO DO: what is correct error handling?
   }
 
+  getStarArray() {
+    const stars = [];
+    // get whole stars
+    for (let i = 0; i < Math.floor(this.state.rating); i += 1) {
+      stars.push('1');
+    }
+
+    if (this.state.rating < 5) {
+      // check if half star is needed
+      if (this.state.rating % 1 >= 0.5) {
+        stars.push('.5');
+      } else {
+        stars.push('0');
+      }
+
+      // fill in rest of array
+      while (stars.length < 5) {
+        stars.push('0');
+      }
+    }
+
+    this.setState({ stars: stars });
+  }
 
   render() {
     return (
@@ -64,7 +88,7 @@ class App extends React.Component {
         <MainDiv id="app">
           <div id="summary-header">
             <PricePerNight costPerNight={this.state.costPerNight} />
-            <Rating rating={this.state.rating} totalReviews={this.state.totalReviews} />
+            <Rating stars={this.state.stars} totalReviews={this.state.totalReviews} />
           </div>
           <MarginLine />
           <Dates />
