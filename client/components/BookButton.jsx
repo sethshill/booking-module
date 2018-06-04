@@ -6,12 +6,12 @@ const ButtonDiv = styled.div`
 `;
 
 const Button = styled.button`
-  cursor: pointer;
   display: inline-block;
   margin: 0px;
   padding: 12px 24px 12px 24px;
   width 100%;
   min-width: 77.66563145999496px;
+  background: #FF5A5F;
   text-align: center;
   font-size: 16px;
   font-weight: 800;
@@ -19,9 +19,9 @@ const Button = styled.button`
   border-width: 2px;
   border-style: solid;
   border-radius: 4px;
-  background: #FF5A5F;
   border-color: transparent;
   color: #ffffff;
+  cursor: pointer;
 `;
 
 const SmallTextDiv = styled.div`
@@ -31,13 +31,11 @@ const SmallTextDiv = styled.div`
 
 const SmallText = styled.small`
   margin: 0px;
-  word-wrap: break-word;
+  padding-top: 0px;
+  padding-bottom: 0px;
   font-size: 12px;
   font-weight: 600;
   line-height: 16px;
-  letter-spacing: normal;
-  padding-top: 0px;
-  padding-bottom: 0px;
   color: #484848;
 `;
 

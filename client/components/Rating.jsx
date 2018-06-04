@@ -4,8 +4,8 @@ import Star from './Star.jsx';
 
 const ReviewCount = styled.span`
   margin: 5px;
-  font-weight: 600;
   font-size: 12px;
+  font-weight: 600;
   line-height: 16px;
   color: #484848;
 `;

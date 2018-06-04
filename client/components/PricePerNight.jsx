@@ -2,28 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Price = styled.span`
-  word-warp: break-word;
-  font-size: 19px;
-  line-height: 26px;
-  letter-spacing: normal;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  color: rgb(72, 72, 72);
-  font-weight: 800;
   display: inline;
   margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 26px;
+  color: rgb(72, 72, 72);
 `;
 
 const PerNight = styled.span`
-  font-weight: 600;
-  margin: 0px;
-  word-wrap: break-word;
-  font-size: 12px;
-  line-height: 16px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  color: #484848;
   display: inline;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #484848;
 `;
 
 const PricePerNight = props => (

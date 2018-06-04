@@ -8,38 +8,38 @@ const MainDiv = styled.div`
 
 const Header = styled.span`
   display: block;
-  font-size: 17px;
-  font-weight: 200;
   margin: 0px;
   padding: 0px 0px 4px 0px;
+  font-size: 17px;
+  font-weight: 200;
 `;
 
 const MainBox = styled.div`
-  font-weight: 600;
-  position: relative;
   display: block;
+  position: relative;
+  width: 100%;
   border: 1px solid #DBDBDB;
   border-radius: 2px;
-  width: 100%;
+  font-weight: 600;
 `;
 
 const InputBox = styled.div`
+  display: inline-block;
+  width: calc(50% - 12px);
+  vertical-align: middle;
+  position: relative;
+  margin: 0px;
+  padding: 8px;
   font-weight: normal;
   font-size: 17px;
   line-height: 24px;
   color: #757575;
-  margin: 0px;
-  padding: 8px;
-  position: relative;
-  display: inline-block;
-  width: calc(50% - 12px);
-  vertical-align: middle;
 `;
 
 const Input = styled.input`
-  border: 0px;
   height: 100%;
   width: 100%;
+  border: 0px;
 `;
 
 const Dates = () => (

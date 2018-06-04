@@ -11,9 +11,6 @@ import BookButton from './components/BookButton.jsx';
 const OuterDiv = styled.div`
   width: 376px;
   margin-left: 45px;
-  font-size: 14px;
-  line-height; 1.43;
-  color: #484848;
 `;
 
 const MainDiv = styled.div`
@@ -22,8 +19,8 @@ const MainDiv = styled.div`
   margin: 16px 0px 24px 0px;
   border: 1px solid #e4e4e4;
   background-color: #ffffff;
-  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: Helvetica Neue,sans-serif;
+  font-size: 14px;
 `;
 
 const MarginLine = styled.div`
