@@ -58,8 +58,6 @@ module.exports.getPricingData = function getPricingDataForDateRange(listingId, s
     AND start_date BETWEEN '${startDate}' AND '${endDate}';`;
 
   connection.query(query, (err, results) => {
-    console.log(results);
-
     if (err) {
       callback(err, null);
     } else if (results.length > 0) {
