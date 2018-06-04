@@ -5,6 +5,7 @@ import axios from 'axios';
 import PricePerNight from './components/PricePerNight.jsx';
 import Rating from './components/Rating.jsx';
 import Dates from './components/Dates.jsx';
+import Guests from './components/Guests.jsx';
 import BookButton from './components/BookButton.jsx';
 
 const OuterDiv = styled.div`
@@ -17,8 +18,7 @@ const OuterDiv = styled.div`
 
 const MainDiv = styled.div`
   display: block;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 24px 24px 24px 24px;
   margin: 16px 0px 24px 0px;
   border: 1px solid #e4e4e4;
   background-color: #ffffff;
@@ -71,7 +71,7 @@ class App extends React.Component {
           </div>
           <MarginLine />
           <Dates />
-          {/* Guests Component */}
+          <Guests />
           <BookButton />
         </MainDiv>
       </OuterDiv>

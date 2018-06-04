@@ -6,7 +6,7 @@ const MainDiv = styled.div`
   margin-bottom: 8px;
 `;
 
-const DatesText = styled.span`
+const Header = styled.span`
   display: block;
   font-size: 17px;
   font-weight: 200;
@@ -14,7 +14,7 @@ const DatesText = styled.span`
   padding: 0px 0px 4px 0px;
 `;
 
-const DatesBox = styled.div`
+const MainBox = styled.div`
   font-weight: 600;
   position: relative;
   display: block;
@@ -44,8 +44,8 @@ const Input = styled.input`
 
 const Dates = () => (
   <MainDiv>
-    <DatesText>Dates</DatesText>
-    <DatesBox>
+    <Header>Dates</Header>
+    <MainBox>
       <InputBox>
         <Input type="text" placeholder="Check In" />
 
@@ -55,7 +55,7 @@ const Dates = () => (
 
         <Input type="text" placeholder="Check Out" />
       </InputBox>
-    </DatesBox>
+    </MainBox>
   </MainDiv>
 );
 
