@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 const Table = styled.table`
   margin: 0 auto;
+  max-width: 100%;
   border-spacing: 0px;
 `;
 
 const Header = styled.th`
   width: 39px;
-  display: inline-block;
   text-align: center;
   font-size: 14px;
   font-weight: 600;
@@ -20,18 +20,20 @@ const Row = styled.tr`
 `;
 
 const BlankSquare = styled.td`
-  width: 38px;
-  height: 38px;
+
+`;
+
+const DateSquare = styled.td`
   border: 1px solid;
 `;
 
-const AvailableDate = styled.td`
+const UnavailbleDate = styled.span`
 
 `;
 
-const UnavailbleDate = styled.td`
+const AvailableDate = styled.span`
 
-`; 
+`;
 
 const CalendarTable = props => (
   <Table>
@@ -52,7 +54,13 @@ const CalendarTable = props => (
           return (
             <Row>
               {
-                week.map(date => <BlankSquare />)
+                week.map((date) => {
+                  return (
+                    <DateSquare>
+                      <AvailableDate>{date}</AvailableDate>
+                    </DateSquare>
+                  );
+                })
               }
             </Row>
           );
