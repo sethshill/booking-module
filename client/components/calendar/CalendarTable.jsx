@@ -40,7 +40,14 @@ const CalendarTable = props => (
             <Row>
               {
                 week.map((date) => {
-                  return <DateSquare date={date} handleDateClick={props.handleDateClick} />
+                  return (
+                    <DateSquare
+                      date={date}
+                      handleDateClick={props.handleDateClick}
+                      startDate={props.startDate}
+                      endDate={props.endDate}
+                    />
+                  );
                 })
               }
             </Row>

@@ -110,15 +110,31 @@ class Calendar extends React.Component {
 
     this.setState({
       dates: dateMatrix,
-    }, () => console.log(this.state));
+    });
   }
 
-  handleDateClick(e) {
-    e.preventDefault();
-
-    this.setState({
-      selectedStartDate: e.currentTarget.textContent,
-    });
+  handleDateClick(e, select, date) {
+    if (select) {
+      if (this.state.selectedStartDate === '') {
+        this.setState({
+          selectedStartDate: date,
+        }, () => console.log(this.state));
+      } else {
+        this.setState({
+          selectedEndDate: date,
+        }, () => console.log(this.state));
+      }
+    } else if (!select) {
+      if (this.state.selectedEndDate === '') {
+        this.setState({
+          selectedStartDate: '',
+        }, () => console.log(this.state));
+      } else {
+        this.setState({
+          selectedEndDate: '',
+        }, () => console.log(this.state));
+      }
+    }
   }
 
 
@@ -127,7 +143,12 @@ class Calendar extends React.Component {
       <OuterDiv>
         <MainDiv>
           <CalendarHeader month={this.monthNames[this.state.month]} year={this.state.year} />
-          <CalendarTable dates={this.state.dates} handleDateClick={this.handleDateClick} />
+          <CalendarTable
+            dates={this.state.dates}
+            handleDateClick={this.handleDateClick}
+            startDate={this.state.selectedStartDate}
+            endDate={this.state.selectedEndDate}
+          />
         </MainDiv>
       </OuterDiv>
     );

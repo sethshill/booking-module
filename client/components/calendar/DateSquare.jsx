@@ -15,6 +15,7 @@ const ClickedSquare = styled.td`
   border: 1px double rgb(0, 166, 153);
   color: white;
   text-align: center;
+  cursor: pointer;
 `;
 
 const UnavailbleDate = styled.span`
@@ -24,6 +25,7 @@ const UnavailbleDate = styled.span`
 
 const AvailableDate = styled.span`
   color: gb(72, 72, 72);
+  cursor: pointer;
 `;
 
 class DateSquare extends React.Component {
@@ -37,13 +39,14 @@ class DateSquare extends React.Component {
   }
 
   handleClick(e) {
-    e.preventDefault();
+    console.log(this.props)
 
-    this.props.handleDateClick(e);
-
-    this.setState({
-      clicked: !this.state.clicked,
-    }, () => console.log(this.state));
+    const dateClicked = e.currentTarget.textContent;
+    if (this.props.startDate === '' || parseInt(this.props.startDate) < dateClicked) {
+      this.setState({
+        clicked: !this.state.clicked,
+      }, () => this.props.handleDateClick(e, this.state.clicked, dateClicked));
+    }
   }
 
   render() {
@@ -69,7 +72,7 @@ class DateSquare extends React.Component {
       );
     }
     return <BlankSquare />;
-  };
-};
+  }
+}
 
 export default DateSquare;
