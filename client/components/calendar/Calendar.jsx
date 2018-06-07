@@ -13,18 +13,10 @@ const OuterDiv = styled.div`
 const MainDiv = styled.div`
   position: relative;
   width: 319px;
-  height: 354px;
+  height: 330px;
   border: 1px solid #DBDBDB;
   border-radius: 3px;
   text-align: left;
-`;
-
-const SmallText = styled.div`
-  margin: 16px 16px;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 16px;
-  color: #484848;
 `;
 
 class Calendar extends React.Component {
@@ -136,7 +128,6 @@ class Calendar extends React.Component {
         <MainDiv>
           <CalendarHeader month={this.monthNames[this.state.month]} year={this.state.year} />
           <CalendarTable dates={this.state.dates} handleDateClick={this.handleDateClick} />
-          <SmallText>Minimum stay varies</SmallText>
         </MainDiv>
       </OuterDiv>
     );
