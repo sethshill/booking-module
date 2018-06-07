@@ -16,23 +16,25 @@ const Header = styled.th`
 `;
 
 const Row = styled.tr`
-
+  height: 38px;
 `;
 
 const BlankSquare = styled.td`
-
+  border: 0px;
 `;
 
 const DateSquare = styled.td`
-  border: 1px solid;
+  border: 1px double rgb(228, 231, 231);
+  text-align: center;
 `;
 
 const UnavailbleDate = styled.span`
-
+  text-decoration: line-through;
+  color: rgb(220, 224, 224);
 `;
 
 const AvailableDate = styled.span`
-
+  color: gb(72, 72, 72);
 `;
 
 const CalendarTable = props => (
@@ -55,11 +57,21 @@ const CalendarTable = props => (
             <Row>
               {
                 week.map((date) => {
-                  return (
-                    <DateSquare>
-                      <AvailableDate>{date}</AvailableDate>
-                    </DateSquare>
-                  );
+                  if (date.value !== 0) {
+                    if (date.available) {
+                      return (
+                        <DateSquare>
+                          <AvailableDate>{date.value}</AvailableDate>
+                        </DateSquare>
+                      );
+                    }
+                    return (
+                      <DateSquare>
+                        <UnavailbleDate>{date.value}</UnavailbleDate>
+                      </DateSquare>
+                    );
+                  }
+                  return <BlankSquare />;
                 })
               }
             </Row>

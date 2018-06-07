@@ -6,7 +6,7 @@ const MainDiv = styled.div`
   width: 274px;
   height 25px;
   padding-top: 22px;
-  padding-bottom: 37px;
+  padding-bottom: 22px;
 `;
 
 const LeftArrowButton = styled.button`
