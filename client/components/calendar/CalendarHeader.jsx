@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const MainDiv = styled.div`
@@ -66,5 +67,12 @@ const CalendarHeader = props => (
     </RightArrowButton>
   </MainDiv>
 );
+
+CalendarHeader.propTypes = {
+  month: PropTypes.string.isRequired,
+  year: PropTypes.number.isRequired,
+  handleLeftArrowClick: PropTypes.func.isRequired,
+  handleRightArrowClick: PropTypes.func.isRequired,
+};
 
 export default CalendarHeader;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const BlankSquare = styled.td`
@@ -39,10 +40,8 @@ class DateSquare extends React.Component {
   }
 
   handleClick(e) {
-    console.log(this.props)
-
     const dateClicked = e.currentTarget.textContent;
-    if (this.props.startDate === '' || parseInt(this.props.startDate) < dateClicked) {
+    if (this.props.endDate === '' && (this.props.startDate === '' || parseInt(this.props.startDate) < dateClicked)) {
       this.setState({
         clicked: !this.state.clicked,
       }, () => this.props.handleDateClick(e, this.state.clicked, dateClicked));
@@ -74,5 +73,15 @@ class DateSquare extends React.Component {
     return <BlankSquare />;
   }
 }
+
+DateSquare.propTypes = {
+  endDate: PropTypes.string.isRequired,
+  startDate: PropTypes.string.isRequired,
+  date: PropTypes.shape({
+    value: PropTypes.number,
+    available: PropTypes.bool,
+  }).isRequired,
+  handleDateClick: PropTypes.func.isRequired,
+};
 
 export default DateSquare;

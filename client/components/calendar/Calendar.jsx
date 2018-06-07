@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import styled from 'styled-components';
 import CalendarHeader from './CalendarHeader.jsx';
 import CalendarTable from './CalendarTable.jsx';
-import axios from 'axios';
 
 const OuterDiv = styled.div`
   position: absolute;
@@ -52,7 +53,6 @@ class Calendar extends React.Component {
 
   getReservedDates() {
     const url = `/booking/availability/listingId/${this.props.listingId}/?start_date=${this.state.year}-${this.state.month + 1}-01&end_date=${this.state.year}-${this.state.month + 2}-01`;
-    console.log(url);
     axios.get(url)
       .then((response) => {
         this.setState({
@@ -186,5 +186,9 @@ class Calendar extends React.Component {
     );
   }
 }
+
+Calendar.propTypes = {
+  listingId: PropTypes.number.isRequired,
+};
 
 export default Calendar;

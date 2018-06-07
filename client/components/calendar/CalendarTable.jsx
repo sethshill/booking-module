@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DateSquare from './DateSquare.jsx'
 
@@ -57,5 +58,9 @@ const CalendarTable = props => (
     </tbody>
   </Table>
 );
+
+CalendarTable.propTypes = {
+  dates: PropTypes.arrayOf(PropTypes.array).isRequired,
+};
 
 export default CalendarTable;
