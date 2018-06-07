@@ -47,10 +47,7 @@ class Calendar extends React.Component {
       startOfMonth: new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), 1),
       month: this.state.currentDate.getMonth(),
       year: this.state.currentDate.getUTCFullYear(),
-    }, () => {
-      this.getReservedDates();
-      console.log(this.state)
-    });
+    }, () => this.getReservedDates());
   }
 
   getReservedDates() {
