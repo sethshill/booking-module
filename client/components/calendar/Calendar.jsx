@@ -41,14 +41,12 @@ class Calendar extends React.Component {
       year: 0,
       reservedDates: [],
       dates: [],
+      selectedStartDate: '',
+      selectedEndDate: '',
     });
-  }
 
-  // dates will look like this
-  // [
-  //   [{value: 0}, {value:0}, {value:1, price: 270, available: true}],
-  //   ..
-  // ]
+    this.handleDateClick = this.handleDateClick.bind(this);
+  }
 
   componentDidMount() {
     this.setState({
@@ -123,13 +121,21 @@ class Calendar extends React.Component {
     }, () => console.log(this.state));
   }
 
+  handleDateClick(e) {
+    e.preventDefault();
+
+    this.setState({
+      selectedStartDate: e.currentTarget.textContent,
+    });
+  }
+
 
   render() {
     return (
       <OuterDiv>
         <MainDiv>
           <CalendarHeader month={this.monthNames[this.state.month]} year={this.state.year} />
-          <CalendarTable dates={this.state.dates} />
+          <CalendarTable dates={this.state.dates} handleDateClick={this.handleDateClick} />
           <SmallText>Minimum stay varies</SmallText>
         </MainDiv>
       </OuterDiv>

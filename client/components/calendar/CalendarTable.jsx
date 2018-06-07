@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import DateSquare from './DateSquare.jsx'
 
 const Table = styled.table`
   margin: 0 auto;
@@ -17,24 +18,6 @@ const Header = styled.th`
 
 const Row = styled.tr`
   height: 38px;
-`;
-
-const BlankSquare = styled.td`
-  border: 0px;
-`;
-
-const DateSquare = styled.td`
-  border: 1px double rgb(228, 231, 231);
-  text-align: center;
-`;
-
-const UnavailbleDate = styled.span`
-  text-decoration: line-through;
-  color: rgb(220, 224, 224);
-`;
-
-const AvailableDate = styled.span`
-  color: gb(72, 72, 72);
 `;
 
 const CalendarTable = props => (
@@ -57,21 +40,7 @@ const CalendarTable = props => (
             <Row>
               {
                 week.map((date) => {
-                  if (date.value !== 0) {
-                    if (date.available) {
-                      return (
-                        <DateSquare>
-                          <AvailableDate>{date.value}</AvailableDate>
-                        </DateSquare>
-                      );
-                    }
-                    return (
-                      <DateSquare>
-                        <UnavailbleDate>{date.value}</UnavailbleDate>
-                      </DateSquare>
-                    );
-                  }
-                  return <BlankSquare />;
+                  return <DateSquare date={date} handleDateClick={props.handleDateClick} />
                 })
               }
             </Row>
