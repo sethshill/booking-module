@@ -36,13 +36,14 @@ const CalendarTable = props => (
     </thead>
     <tbody>
       {
-        props.dates.map((week) => {
+        props.dates.map((week, index) => {
           return (
-            <Row>
+            <Row key={index}>
               {
-                week.map((date) => {
+                week.map((date, index) => {
                   return (
                     <DateSquare
+                      key={index}
                       date={date}
                       handleDateClick={props.handleDateClick}
                       startDate={props.startDate}
