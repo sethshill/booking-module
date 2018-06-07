@@ -28,7 +28,7 @@ class Calendar extends React.Component {
     ];
 
     this.state = ({
-      date: new Date(),
+      currentDate: new Date(),
       month: 0,
       year: 0,
       reservedDates: [],
@@ -38,13 +38,19 @@ class Calendar extends React.Component {
     });
 
     this.handleDateClick = this.handleDateClick.bind(this);
+    this.handleRightArrowClick = this.handleRightArrowClick.bind(this);
+    this.handleLeftArrowClick = this.handleLeftArrowClick.bind(this);
   }
 
   componentDidMount() {
     this.setState({
-      month: this.state.date.getMonth(),
-      year: this.state.date.getUTCFullYear(),
-    }, () => this.getReservedDates());
+      startOfMonth: new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), 1),
+      month: this.state.currentDate.getMonth(),
+      year: this.state.currentDate.getUTCFullYear(),
+    }, () => {
+      this.getReservedDates();
+      console.log(this.state)
+    });
   }
 
   getReservedDates() {
@@ -63,8 +69,8 @@ class Calendar extends React.Component {
     const dateMatrix = [[]];
 
     const currentDate = new Date();
-    const firstDay = new Date(this.state.date.getFullYear(), this.state.date.getMonth(), 1);
-    const lastDay = new Date(this.state.date.getFullYear(), this.state.date.getMonth() + 1, 0);
+    const firstDay = new Date(this.state.startOfMonth.getFullYear(), this.state.startOfMonth.getMonth(), 1);
+    const lastDay = new Date(this.state.startOfMonth.getFullYear(), this.state.startOfMonth.getMonth() + 1, 0);
 
     const dayOfWeekOfFirstDay = firstDay.getDay();
     const lastDate = lastDay.getDate();
@@ -113,26 +119,50 @@ class Calendar extends React.Component {
     });
   }
 
+  handleRightArrowClick() {
+    this.setState({
+      startOfMonth: new Date(this.state.startOfMonth.getFullYear(), this.state.startOfMonth.getMonth() + 1, 1),
+    }, () => {
+      this.setState({
+        month: this.state.startOfMonth.getMonth(),
+        year: this.state.startOfMonth.getUTCFullYear(),
+      }, () => this.getReservedDates());
+    });
+  }
+
+  handleLeftArrowClick() {
+    if ((this.state.year === this.state.currentDate.getFullYear() && this.state.month > this.state.currentDate.getMonth()) || this.state.year > this.state.currentDate.getFullYear()) {
+      this.setState({
+        startOfMonth: new Date(this.state.startOfMonth.getFullYear(), this.state.startOfMonth.getMonth() - 1, 1),
+      }, () => {
+        this.setState({
+          month: this.state.startOfMonth.getMonth(),
+          year: this.state.startOfMonth.getUTCFullYear(),
+        }, () => this.getReservedDates());
+      });
+    }
+  }
+
   handleDateClick(e, select, date) {
     if (select) {
       if (this.state.selectedStartDate === '') {
         this.setState({
           selectedStartDate: date,
-        }, () => console.log(this.state));
+        });
       } else {
         this.setState({
           selectedEndDate: date,
-        }, () => console.log(this.state));
+        });
       }
     } else if (!select) {
       if (this.state.selectedEndDate === '') {
         this.setState({
           selectedStartDate: '',
-        }, () => console.log(this.state));
+        });
       } else {
         this.setState({
           selectedEndDate: '',
-        }, () => console.log(this.state));
+        });
       }
     }
   }
@@ -142,7 +172,12 @@ class Calendar extends React.Component {
     return (
       <OuterDiv>
         <MainDiv>
-          <CalendarHeader month={this.monthNames[this.state.month]} year={this.state.year} />
+          <CalendarHeader
+            month={this.monthNames[this.state.month]}
+            year={this.state.year}
+            handleRightArrowClick={this.handleRightArrowClick}
+            handleLeftArrowClick={this.handleLeftArrowClick}
+          />
           <CalendarTable
             dates={this.state.dates}
             handleDateClick={this.handleDateClick}
