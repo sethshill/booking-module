@@ -7,6 +7,7 @@ import Rating from './components/Rating.jsx';
 import Dates from './components/Dates.jsx';
 import Guests from './components/Guests.jsx';
 import BookButton from './components/BookButton.jsx';
+import GuestPicker from './components/guests/GuestPicker.jsx'
 
 const OuterDiv = styled.div`
   width: 376px;
@@ -95,6 +96,7 @@ class App extends React.Component {
           <Guests />
           <BookButton />
         </MainDiv>
+        <GuestPicker />
       </OuterDiv>
     );
   }
