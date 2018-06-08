@@ -1,22 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MainDiv = styled.div`
+const OuterDiv = styled.div`
   position: absolute;
-  left: 0px;
-  min-width: 280px;
-  margin-bottom: 16px;
+  margin: 16px 16px 16px 16px;
+  font-family: Helvetica Neue,sans-serif;
+`;
+
+const MainDiv = styled.div`
+  position: relative;
+  width: 319px;
+  height: 330px;
   padding: 0px 16px;
-  border: 1px solid #e4e4e4;
+  border: 1px solid #DBDBDB;
   border-radius: 3px;
-  box-sizing: border-box;
   text-align: left;
 `;
 
 const GuestPicker = () => (
-  <MainDiv>
-    Hello
-  </MainDiv>
+  <OuterDiv>
+    <MainDiv>
+      Helveticaello
+    </MainDiv>
+  </OuterDiv>
 );
 
 export default GuestPicker;
