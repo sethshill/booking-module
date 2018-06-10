@@ -20,13 +20,45 @@ const MainDiv = styled.div`
   text-align: left;
 `;
 
+const SmallText = styled.div`
+  font-size: 14px;
+  line-height: 18px;
+  color: #484848;
+  padding-top: 4px;
+  padding-bottom: 0px;
+`;
+
 const GuestPicker = props => (
   <OuterDiv>
     <MainDiv>
-      <Picker handleClick={props.handleClick} label="Adults" max={props.guestsAllowed.maxAdults} selected={props.guestsSelected.adults} />
-      <Picker handleClick={props.handleClick} label="Children" smallText="Ages 2 - 12" max={props.guestsAllowed.maxChildren} selected={props.guestsSelected.children} />
-      <Picker handleClick={props.handleClick} label="Infants" smallText="Under 2" max={props.guestsAllowed.maxInfants} selected={props.guestsSelected.infants} />
-      <span>Infants don’t count toward the number of guests.</span>
+      <Picker
+        handleClick={props.handleClick}
+        label="Adults"
+        max={props.guestsAllowed.maxAdults}
+        maxTotal={props.guestsAllowed.maxAdults}
+        selected={props.guestsSelected.adults}
+        selectedTotal={props.guestsSelected.adults + props.guestsSelected.children}
+      />
+      <Picker
+        handleClick={props.handleClick}
+        label="Children"
+        smallText="Ages 2 - 12"
+        max={props.guestsAllowed.maxChildren}
+        maxTotal={props.guestsAllowed.maxAdults}
+        selected={props.guestsSelected.children}
+        selectedTotal={props.guestsSelected.adults + props.guestsSelected.children}
+      />
+      <Picker
+        handleClick={props.handleClick}
+        label="Infants"
+        smallText="Under 2"
+        max={props.guestsAllowed.maxInfants}
+        selected={props.guestsSelected.infants}
+      />
+      <SmallText>
+        {props.guestsAllowed.maxAdults} guests maximum.
+        Infants don’t count toward the number of guests.
+      </SmallText>
       <button>Close</button>
     </MainDiv>
   </OuterDiv>

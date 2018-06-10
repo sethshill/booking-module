@@ -85,7 +85,7 @@ const Picker = props => (
       <Count>{props.selected}</Count>
       <CircleButton
         onClick={(e) => {
-          if (props.selected < props.max) {
+          if (props.selected < props.max && props.selectedTotal < props.maxTotal) {
             props.handleClick(e, props.label, 1);
           }
         }}
@@ -107,10 +107,14 @@ Picker.propTypes = {
   max: PropTypes.number.isRequired,
   selected: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
+  maxTotal: PropTypes.number,
+  selectedTotal: PropTypes.number,
 };
 
 Picker.defaultProps = {
   smallText: '',
+  maxTotal: 100,
+  selectedTotal: 0,
 };
 
 export default Picker;
