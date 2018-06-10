@@ -44,6 +44,10 @@ class App extends React.Component {
       costSummaryDisplayed: true,
       selectedStartDate: '2018-6-01',
       selectedEndDate: '2018-7-01',
+      cleaningFee: 0,
+      serviceFeePerc: 0,
+      occTaxRatePerc: 0,
+      additionalGuestFee: 0,
     };
   }
 
@@ -59,6 +63,10 @@ class App extends React.Component {
           costPerNight: listing.avg_cost_per_night,
           totalReviews: listing.review_count,
           rating: listing.avg_rating,
+          cleaningFee: listing.cleaning_fee,
+          serviceFeePerc: listing.service_fee_perc,
+          occTaxRatePerc: listing.occ_tax_rate_perc,
+          additionalGuestFee: listing.additional_guest_fee,
         }, this.getStarArray);
       })
       .catch(error => console.log(error)); // TO DO: what is correct error handling?
@@ -105,6 +113,10 @@ class App extends React.Component {
               listingId={this.state.listingId}
               startDate={this.state.selectedStartDate}
               endDate={this.state.selectedEndDate}
+              cleaningFee={this.state.cleaningFee}
+              serviceFeePerc={this.state.serviceFeePerc}
+              occTaxRatePerc={this.state.occTaxRatePerc}
+              additionalGuestFee={this.state.additionalGuestFee}
             />
             <BookButton />
           </MainDiv>

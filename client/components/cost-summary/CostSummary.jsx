@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
 
+const CostLine = styled.div`
+
+`;
+
 const MarginLine = styled.div`
   margin-top: 16px;
   margin-bottom: 16px;
@@ -60,7 +64,24 @@ class CostSummary extends React.Component {
 
   render() {
     if (this.props.display) {
-      return <div>{this.state.totalNightlyCost}</div>;
+      return (
+        <div>
+          <MarginLine />
+          <div>${this.state.totalNightlyCost}</div>
+          <MarginLine />
+          <CostLine>Cleaning Fee ${this.props.cleaningFee}</CostLine>
+          <MarginLine />
+          <CostLine>
+            Service Fee ${Math.floor(this.props.serviceFeePerc * this.state.totalNightlyCost)}
+          </CostLine>
+          <MarginLine />
+          <CostLine>
+            Occupancy Taxes ${Math.floor(this.props.occTaxRatePerc * this.state.totalNightlyCost)}
+          </CostLine>
+          <MarginLine />
+          <CostLine>Total</CostLine>
+        </div>
+      );
     }
     return null;
   }
@@ -71,6 +92,10 @@ CostSummary.propTypes = {
   listingId: PropTypes.number.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
+  cleaningFee: PropTypes.number.isRequired,
+  serviceFeePerc: PropTypes.number.isRequired,
+  occTaxRatePerc: PropTypes.number.isRequired,
+  additionalGuestFee: PropTypes.number.isRequired,
 };
 
 export default CostSummary;
