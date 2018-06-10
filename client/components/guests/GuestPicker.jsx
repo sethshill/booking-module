@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Picker from './Picker.jsx';
 
 const OuterDiv = styled.div`
   position: absolute;
@@ -20,7 +21,11 @@ const MainDiv = styled.div`
 const GuestPicker = () => (
   <OuterDiv>
     <MainDiv>
-      Helveticaello
+      <Picker label="Adults" />
+      <Picker label="Children" smallText="Ages 2 - 12" />
+      <Picker label="Infants" smallText="Under 2" />
+      <span>2 guests maximum. Infants don’t count toward the number of guests.</span>
+      <button>Close</button>
     </MainDiv>
   </OuterDiv>
 );
