@@ -55,7 +55,7 @@ module.exports.getPricingData = function getPricingDataForDateRange(listingId, s
   const query = `SELECT id, start_date, cost_per_night
     FROM listing_daily_prices
     WHERE listing_id = ${listingId}
-    AND start_date BETWEEN '${startDate}' AND '${endDate}';`;
+    AND start_date < '${endDate}';`;
 
   connection.query(query, (err, results) => {
     if (err) {
