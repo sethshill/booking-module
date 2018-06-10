@@ -4,7 +4,8 @@ import Picker from './Picker.jsx';
 
 const OuterDiv = styled.div`
   position: absolute;
-  margin: 16px 16px 16px 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
   font-family: Helvetica Neue,sans-serif;
 `;
 
