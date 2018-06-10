@@ -87,7 +87,6 @@ class App extends React.Component {
 
   render() {
     return (
-<<<<<<< HEAD
       <OuterDiv>
         <MainDiv id="app">
           <div id="summary-header">
@@ -100,24 +99,8 @@ class App extends React.Component {
           <BookButton />
         </MainDiv>
         <GuestPicker />
+        { /* <Calendar listingId={this.state.listingId} /> */ }
       </OuterDiv>
-=======
-      <div>
-        <OuterDiv>
-          <MainDiv id="app">
-            <div id="summary-header">
-              <PricePerNight costPerNight={this.state.costPerNight} />
-              <Rating stars={this.state.stars} totalReviews={this.state.totalReviews} />
-            </div>
-            <MarginLine />
-            <Dates />
-            <Guests />
-            <BookButton />
-          </MainDiv>
-        </OuterDiv>
-        <Calendar listingId={this.state.listingId} />
-      </div>
->>>>>>> 2581450c31398e56b17cb7b538ba4b17d49abffc
     );
   }
 }
