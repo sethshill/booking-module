@@ -13,7 +13,7 @@ const OuterDiv = styled.div`
 const MainDiv = styled.div`
   position: relative;
   width: 319px;
-  height: 330px;
+  height: 280px;
   padding: 0px 16px;
   border: 1px solid #DBDBDB;
   border-radius: 3px;
@@ -26,6 +26,17 @@ const SmallText = styled.div`
   color: #484848;
   padding-top: 4px;
   padding-bottom: 0px;
+`;
+
+const CloseButton = styled.button`
+  float: right;
+  margin: 20px;
+  padding: 0px;
+  border: 0;
+  cursor: pointer;
+  color: #008489;
+  font-size: 16px;
+  text-align: right;
 `;
 
 const GuestPicker = props => (
@@ -59,7 +70,7 @@ const GuestPicker = props => (
         {props.guestsAllowed.maxAdults} guests maximum.
         Infants don’t count toward the number of guests.
       </SmallText>
-      <button>Close</button>
+      <CloseButton>Close</CloseButton>
     </MainDiv>
   </OuterDiv>
 );
