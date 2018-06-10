@@ -69,15 +69,27 @@ const Picker = props => (
       <SmallText>{props.smallText}</SmallText>
     </LabelContainer>
     <ButtonContainer>
-      <CircleButton>
+      <CircleButton
+        onClick={(e) => {
+          if (props.selected > 0) {
+            props.handleClick(e, props.label, -1);
+          }
+        }}
+      >
         <PlusMinusContainer>
           <PlusMinus viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
           </PlusMinus>
         </PlusMinusContainer>
       </CircleButton>
-      <Count>{props.count}</Count>
-      <CircleButton>
+      <Count>{props.selected}</Count>
+      <CircleButton
+        onClick={(e) => {
+          if (props.selected < props.max) {
+            props.handleClick(e, props.label, 1);
+          }
+        }}
+      >
         <PlusMinusContainer>
           <PlusMinus viewBox="0 0 24 24">
             <rect height="2" rx="1" width="12" x="6" y="11" />
@@ -92,12 +104,13 @@ const Picker = props => (
 Picker.propTypes = {
   label: PropTypes.string.isRequired,
   smallText: PropTypes.string,
-  count: PropTypes.number,
+  max: PropTypes.number.isRequired,
+  selected: PropTypes.number.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 Picker.defaultProps = {
   smallText: '',
-  count: 1,
 };
 
 export default Picker;
