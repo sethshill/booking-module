@@ -6,6 +6,7 @@ import PricePerNight from './components/PricePerNight.jsx';
 import Rating from './components/Rating.jsx';
 import Dates from './components/Dates.jsx';
 import Guests from './components/Guests.jsx';
+import CostSummary from './components/cost-summary/CostSummary.jsx';
 import BookButton from './components/BookButton.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
 
@@ -40,6 +41,9 @@ class App extends React.Component {
       totalReviews: 0,
       rating: 0,
       stars: [],
+      costSummaryDisplayed: true,
+      selectedStartDate: '2018-6-01',
+      selectedEndDate: '2018-7-01',
     };
   }
 
@@ -96,6 +100,12 @@ class App extends React.Component {
             <MarginLine />
             <Dates />
             <Guests />
+            <CostSummary
+              display={this.state.costSummaryDisplayed}
+              listingId={this.state.listingId}
+              startDate={this.state.selectedStartDate}
+              endDate={this.state.selectedEndDate}
+            />
             <BookButton />
           </MainDiv>
         </OuterDiv>
