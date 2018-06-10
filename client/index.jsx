@@ -8,6 +8,7 @@ import Dates from './components/Dates.jsx';
 import Guests from './components/Guests.jsx';
 import BookButton from './components/BookButton.jsx';
 import GuestPicker from './components/guests/GuestPicker.jsx'
+import Calendar from './components/calendar/Calendar.jsx';
 
 const OuterDiv = styled.div`
   width: 376px;
@@ -35,6 +36,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      listingId: 1,
       costPerNight: 0,
       totalReviews: 0,
       rating: 0,
@@ -47,7 +49,7 @@ class App extends React.Component {
   }
 
   getCoreData() {
-    axios.get('/booking/core/listingId/2')
+    axios.get(`/booking/core/listingId/${this.state.listingId}`)
       .then((response) => {
         const listing = response.data[0];
         this.setState({
@@ -85,6 +87,7 @@ class App extends React.Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <OuterDiv>
         <MainDiv id="app">
           <div id="summary-header">
@@ -98,6 +101,23 @@ class App extends React.Component {
         </MainDiv>
         <GuestPicker />
       </OuterDiv>
+=======
+      <div>
+        <OuterDiv>
+          <MainDiv id="app">
+            <div id="summary-header">
+              <PricePerNight costPerNight={this.state.costPerNight} />
+              <Rating stars={this.state.stars} totalReviews={this.state.totalReviews} />
+            </div>
+            <MarginLine />
+            <Dates />
+            <Guests />
+            <BookButton />
+          </MainDiv>
+        </OuterDiv>
+        <Calendar listingId={this.state.listingId} />
+      </div>
+>>>>>>> 2581450c31398e56b17cb7b538ba4b17d49abffc
     );
   }
 }
