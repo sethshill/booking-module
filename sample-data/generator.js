@@ -46,7 +46,7 @@ for (let i = 0; i < 100; i += 1) {
 
 // generate reservations
 const reservations = [];
-const startDate = new Date(2018, 6, 15);
+const startDate = new Date(2018, 5, 15);
 
 let rowNum = 1;
 
@@ -69,7 +69,7 @@ for (let i = 0; i < 100; i += 1) {
 
 // generate daily prices
 const dailyPrices = [];
-const priceStartDate = new Date(2018, 6, 1);
+const priceStartDate = new Date(2018, 5, 1);
 rowNum = 1;
 
 for (let i = 0; i < 100; i += 1) {
