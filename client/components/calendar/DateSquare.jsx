@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const BlankSquare = styled.td`
-  border: 0px;
+  border: 0;
 `;
 
 const Square = styled.td`
@@ -14,18 +14,21 @@ const Square = styled.td`
 const ClickedSquare = styled.td`
   background-color: rgb(0, 166, 153);
   border: 1px double rgb(0, 166, 153);
-  color: white;
   text-align: center;
-  cursor: pointer;
 `;
 
-const UnavailbleDate = styled.span`
+const UnavailableDate = styled.span`
   text-decoration: line-through;
   color: rgb(220, 224, 224);
 `;
 
 const AvailableDate = styled.span`
-  color: gb(72, 72, 72);
+  color: rgb(72, 72, 72);
+  cursor: pointer;
+`;
+
+const ClickedDate = styled.span`
+  color: rgb(255, 255, 255);
   cursor: pointer;
 `;
 
@@ -60,13 +63,13 @@ class DateSquare extends React.Component {
         }
         return (
           <ClickedSquare onClick={this.handleClick}>
-            <AvailableDate>{this.props.date.value}</AvailableDate>
+            <ClickedDate>{this.props.date.value}</ClickedDate>
           </ClickedSquare>
         );
       }
       return (
         <Square>
-          <UnavailbleDate>{this.props.date.value}</UnavailbleDate>
+          <UnavailableDate>{this.props.date.value}</UnavailableDate>
         </Square>
       );
     }

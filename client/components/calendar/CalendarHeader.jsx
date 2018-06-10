@@ -43,7 +43,7 @@ const Arrow = styled.svg`
 `;
 
 const Month = styled.div`
-  display:inline-block;
+  display: inline-block;
   margin: 0 auto;
   width: 100%;
   text-align: center;
