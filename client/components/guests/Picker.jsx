@@ -71,7 +71,7 @@ const Picker = props => (
     <ButtonContainer>
       <CircleButton
         onClick={(e) => {
-          if (props.selected > 0) {
+          if ((props.label === 'Adults' && props.selected > 1) || (props.label !== 'Adults' && props.selected > 0)) {
             props.handleClick(e, props.label, -1);
           }
         }}
