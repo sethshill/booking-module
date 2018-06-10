@@ -18,48 +18,53 @@ class CostSummary extends React.Component {
     super(props);
 
     this.state = {
-      prices: [],
+      durationOfStay: 0,
       totalNightlyCost: 0,
+      totalCost: 0,
     };
 
-    this.getPrices = this.getPrices.bind(this);
-    this.calculateTotal = this.calculateTotal.bind(this);
+    // this.getPrices = this.getPrices.bind(this);
+    this.calculateTotals = this.calculateTotals.bind(this);
   }
 
   componentDidMount() {
     if (this.props.display) {
-      this.getPrices();
+      this.calculateTotals();
     }
   }
 
-  getPrices() {
-    const url = `/booking/pricing/listingId/${this.props.listingId}/?start_date=${this.props.startDate}&end_date=${this.props.endDate}`;
-    axios.get(url)
-      .then((response) => {
-        this.setState({
-          prices: response.data,
-        }, () => this.calculateTotal());
-      })
-      .catch(error => console.log(error)); // TO DO: what is correct error handling?
+  componentDidUpdate(previousProps) {
+    if (previousProps.costPerNight !== this.props.costPerNight) {
+      this.calculateTotals();
+    }
   }
 
-  calculateTotal() {
-    const currentDate = new Date(this.props.startDate);
+  // getPrices() {
+  //   const url = `/booking/pricing/listingId/${this.props.listingId}/?start_date=${this.props.startDate}&end_date=${this.props.endDate}`;
+  //   axios.get(url)
+  //     .then((response) => {
+  //       this.setState({
+  //         prices: response.data,
+  //       }, () => this.calculateTotals());
+  //     })
+  //     .catch(error => console.log(error)); // TO DO: what is correct error handling?
+  // }
+
+  calculateTotals() {
     let durationOfStay = Date.parse(this.props.endDate) - Date.parse(this.props.startDate);
     durationOfStay = Math.floor(durationOfStay / 86400000);
-    let totalNightlyCost = 0;
 
-    for (let i = 1; i <= durationOfStay; i += 1) {
-      let closestDate = this.props.startDate;
-      let price = 0;
-      for (let j = 0; j < this.state.prices.length; j += 1) {
-        price += 1;
-      }
+    const totalNightlyCost = durationOfStay * this.props.costPerNight;
+    let totalCost = totalNightlyCost;
+    totalCost += totalNightlyCost * this.props.serviceFeePerc;
+    totalCost += totalNightlyCost * this.props.occTaxRatePerc;
+    totalCost += this.props.cleaningFee;
 
-      totalNightlyCost += price;
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-
+    this.setState({
+      durationOfStay,
+      totalNightlyCost,
+      totalCost,
+    });
   }
 
   render() {
@@ -67,7 +72,10 @@ class CostSummary extends React.Component {
       return (
         <div>
           <MarginLine />
-          <div>${this.state.totalNightlyCost}</div>
+          <CostLine>
+            ${this.props.costPerNight} x {this.state.durationOfStay} nights
+            ${this.state.totalNightlyCost}
+          </CostLine>
           <MarginLine />
           <CostLine>Cleaning Fee ${this.props.cleaningFee}</CostLine>
           <MarginLine />
@@ -79,7 +87,7 @@ class CostSummary extends React.Component {
             Occupancy Taxes ${Math.floor(this.props.occTaxRatePerc * this.state.totalNightlyCost)}
           </CostLine>
           <MarginLine />
-          <CostLine>Total</CostLine>
+          <CostLine>Total ${this.state.totalCost}</CostLine>
         </div>
       );
     }
@@ -92,6 +100,7 @@ CostSummary.propTypes = {
   listingId: PropTypes.number.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
+  costPerNight: PropTypes.number.isRequired,
   cleaningFee: PropTypes.number.isRequired,
   serviceFeePerc: PropTypes.number.isRequired,
   occTaxRatePerc: PropTypes.number.isRequired,

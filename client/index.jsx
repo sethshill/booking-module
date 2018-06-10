@@ -113,6 +113,7 @@ class App extends React.Component {
               listingId={this.state.listingId}
               startDate={this.state.selectedStartDate}
               endDate={this.state.selectedEndDate}
+              costPerNight={this.state.costPerNight}
               cleaningFee={this.state.cleaningFee}
               serviceFeePerc={this.state.serviceFeePerc}
               occTaxRatePerc={this.state.occTaxRatePerc}
