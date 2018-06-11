@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import styled from 'styled-components';
 
 const CostLine = styled.div`
@@ -34,7 +33,7 @@ class CostSummary extends React.Component {
   }
 
   componentDidUpdate(previousProps) {
-    if (previousProps.costPerNight !== this.props.costPerNight) {
+    if (previousProps.startDate !== this.props.startDate || previousProps.endDate !== this.props.endDate) {
       this.calculateTotals();
     }
   }
@@ -97,14 +96,14 @@ class CostSummary extends React.Component {
 
 CostSummary.propTypes = {
   display: PropTypes.bool.isRequired,
-  listingId: PropTypes.number.isRequired,
+  // listingId: PropTypes.number.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
   costPerNight: PropTypes.number.isRequired,
   cleaningFee: PropTypes.number.isRequired,
   serviceFeePerc: PropTypes.number.isRequired,
   occTaxRatePerc: PropTypes.number.isRequired,
-  additionalGuestFee: PropTypes.number.isRequired,
+  // additionalGuestFee: PropTypes.number.isRequired,
 };
 
 export default CostSummary;

@@ -41,14 +41,16 @@ class App extends React.Component {
       totalReviews: 0,
       rating: 0,
       stars: [],
-      costSummaryDisplayed: true,
-      selectedStartDate: '2018-6-01',
-      selectedEndDate: '2018-7-01',
+      costSummaryDisplayed: false,
+      selectedStartDate: '',
+      selectedEndDate: '',
       cleaningFee: 0,
       serviceFeePerc: 0,
       occTaxRatePerc: 0,
       additionalGuestFee: 0,
     };
+
+    this.handleDateSelection = this.handleDateSelection.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +74,7 @@ class App extends React.Component {
       .catch(error => console.log(error)); // TO DO: what is correct error handling?
   }
 
+
   getStarArray() {
     const stars = [];
     // get whole stars
@@ -93,7 +96,18 @@ class App extends React.Component {
       }
     }
 
-    this.setState({ stars: stars });
+    this.setState({ stars });
+  }
+
+  handleDateSelection(startDate, endDate) {
+    this.setState({
+      selectedStartDate: startDate,
+      selectedEndDate: endDate,
+    }, () => {
+      this.setState({
+        costSummaryDisplayed: !!(this.state.selectedStartDate && this.state.selectedEndDate),
+      });
+    });
   }
 
   render() {
@@ -122,7 +136,7 @@ class App extends React.Component {
             <BookButton />
           </MainDiv>
         </OuterDiv>
-        <Calendar listingId={this.state.listingId} />
+        <Calendar listingId={this.state.listingId} handleDateSelection={this.handleDateSelection} />
       </div>
     );
   }
