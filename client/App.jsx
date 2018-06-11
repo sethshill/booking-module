@@ -72,7 +72,6 @@ class App extends React.Component {
     axios.get(`/listings/${this.props.listingId}/booking/core`)
       .then((response) => {
         const listing = response.data[0];
-        console.log(listing);
         this.setState({
           costPerNight: listing.avg_cost_per_night,
           totalReviews: listing.review_count,
@@ -151,7 +150,10 @@ class App extends React.Component {
               endDate={this.state.selectedEndDate}
             />
             <GuestsButton
-              guestsSelected={this.state.guestsSelected.adults + this.state.guestsSelected.children + this.state.guestsSelected.infants}
+              guestsSelected={this.state.guestsSelected.adults +
+                this.state.guestsSelected.children +
+                this.state.guestsSelected.infants
+              }
             />
             <CostSummary
               display={this.state.costSummaryDisplayed}
