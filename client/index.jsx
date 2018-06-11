@@ -7,6 +7,7 @@ import Rating from './components/Rating.jsx';
 import Dates from './components/Dates.jsx';
 import Guests from './components/Guests.jsx';
 import BookButton from './components/BookButton.jsx';
+import GuestPicker from './components/guests/GuestPicker.jsx'
 import Calendar from './components/calendar/Calendar.jsx';
 
 const OuterDiv = styled.div`
@@ -40,7 +41,19 @@ class App extends React.Component {
       totalReviews: 0,
       rating: 0,
       stars: [],
+      guestsAllowed: {
+        maxAdults: 0,
+        maxChildren: 0,
+        maxInfants: 0,
+      },
+      guestsSelected: {
+        adults: 1,
+        children: 0,
+        infants: 0,
+      },
     };
+
+    this.changeSelectedGuests = this.changeSelectedGuests.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +68,11 @@ class App extends React.Component {
           costPerNight: listing.avg_cost_per_night,
           totalReviews: listing.review_count,
           rating: listing.avg_rating,
+          guestsAllowed: {
+            maxAdults: listing.max_adults,
+            maxChildren: listing.max_children,
+            maxInfants: listing.max_infants,
+          },
         }, this.getStarArray);
       })
       .catch(error => console.log(error)); // TO DO: what is correct error handling?
@@ -84,23 +102,35 @@ class App extends React.Component {
     this.setState({ stars: stars });
   }
 
+  changeSelectedGuests(e, type, incrementor) {
+    const guestsSelected = this.state.guestsSelected;
+    guestsSelected[type.toLowerCase()] += incrementor;
+
+    this.setState({
+      guestsSelected: guestsSelected,
+    });
+  }
+
   render() {
     return (
-      <div>
-        <OuterDiv>
-          <MainDiv id="app">
-            <div id="summary-header">
-              <PricePerNight costPerNight={this.state.costPerNight} />
-              <Rating stars={this.state.stars} totalReviews={this.state.totalReviews} />
-            </div>
-            <MarginLine />
-            <Dates />
-            <Guests />
-            <BookButton />
-          </MainDiv>
-        </OuterDiv>
-        <Calendar listingId={this.state.listingId} />
-      </div>
+      <OuterDiv>
+        <MainDiv id="app">
+          <div id="summary-header">
+            <PricePerNight costPerNight={this.state.costPerNight} />
+            <Rating stars={this.state.stars} totalReviews={this.state.totalReviews} />
+          </div>
+          <MarginLine />
+          <Dates />
+          <Guests />
+          <BookButton />
+        </MainDiv>
+        <GuestPicker
+          guestsAllowed={this.state.guestsAllowed}
+          guestsSelected={this.state.guestsSelected}
+          handleClick={this.changeSelectedGuests}
+        />
+        { /* <Calendar listingId={this.state.listingId} /> */ }
+      </OuterDiv>
     );
   }
 }
