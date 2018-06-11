@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Calendar from './Calendar.jsx'
+import Calendar from './Calendar.jsx';
 
 const MainDiv = styled.div`
   margin-top: 16px;

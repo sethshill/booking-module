@@ -7,7 +7,6 @@ import DatesButtons from './components/calendar/DatesButtons.jsx';
 import GuestsButton from './components/guests/GuestsButton.jsx';
 import CostSummary from './components/booking-details/CostSummary.jsx';
 import BookButton from './components/BookButton.jsx';
-import Calendar from './components/calendar/Calendar.jsx';
 
 const OuterDiv = styled.div`
   width: 376px;
@@ -118,8 +117,7 @@ class App extends React.Component {
     this.setState({ stars });
   }
 
-  handleDateClick(e) {
-    e.preventDefault();
+  handleDateClick() {
     this.setState({
       calendarDisplayed: !this.state.calendarDisplayed,
       guestPickerDisplayed: false,
@@ -144,7 +142,7 @@ class App extends React.Component {
     this.setState({
       guestPickerDisplayed: !this.state.guestPickerDisplayed,
       calendarDisplayed: false,
-      costSummaryDisplayed: false,
+      costSummaryDisplayed: !!(this.state.selectedStartDate && this.state.selectedEndDate),
     });
   }
 
