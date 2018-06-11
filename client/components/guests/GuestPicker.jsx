@@ -70,7 +70,9 @@ const GuestPicker = props => (
         {props.guestsAllowed.maxAdults} guests maximum.
         Infants don’t count toward the number of guests.
       </SmallText>
-      <CloseButton>Close</CloseButton>
+      <CloseButton onClick={props.handleClose}>
+        Close
+      </CloseButton>
     </MainDiv>
   </OuterDiv>
 );
@@ -87,6 +89,7 @@ GuestPicker.propTypes = {
     infants: PropTypes.number.isRequired,
   }).isRequired,
   handleClick: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default GuestPicker;

@@ -7,7 +7,6 @@ import DatesButtons from './components/calendar/DatesButtons.jsx';
 import GuestsButton from './components/guests/GuestsButton.jsx';
 import CostSummary from './components/booking-details/CostSummary.jsx';
 import BookButton from './components/BookButton.jsx';
-import GuestPicker from './components/guests/GuestPicker.jsx'
 import Calendar from './components/calendar/Calendar.jsx';
 
 const OuterDiv = styled.div`
@@ -41,7 +40,6 @@ class App extends React.Component {
       totalReviews: 0,
       rating: 0,
       stars: [],
-      costSummaryDisplayed: false,
       selectedStartDate: '',
       selectedEndDate: '',
       cleaningFee: 0,
@@ -58,9 +56,14 @@ class App extends React.Component {
         children: 0,
         infants: 0,
       },
+      calendarDisplayed: false,
+      guestPickerDisplayed: false,
+      costSummaryDisplayed: false,
     };
 
+    this.handleDateClick = this.handleDateClick.bind(this);
     this.handleDateSelection = this.handleDateSelection.bind(this);
+    this.handleGuestsClick = this.handleGuestsClick.bind(this);
     this.changeSelectedGuests = this.changeSelectedGuests.bind(this);
   }
 
@@ -115,6 +118,12 @@ class App extends React.Component {
     this.setState({ stars });
   }
 
+  handleDateClick() {
+    this.setState({
+      calendarDisplayed: !this.state.calendarDisplayed,
+    });
+  }
+
   handleDateSelection(startDate, endDate) {
     this.setState({
       selectedStartDate: startDate,
@@ -123,6 +132,12 @@ class App extends React.Component {
       this.setState({
         costSummaryDisplayed: !!(this.state.selectedStartDate && this.state.selectedEndDate),
       });
+    });
+  }
+
+  handleGuestsClick() {
+    this.setState({
+      guestPickerDisplayed: !this.state.guestPickerDisplayed,
     });
   }
 
@@ -146,11 +161,17 @@ class App extends React.Component {
             </div>
             <MarginLine />
             <DatesButtons
+              handleClick={this.handleDateClick}
               startDate={this.state.selectedStartDate}
               endDate={this.state.selectedEndDate}
             />
             <GuestsButton
-              guestsSelected={this.state.guestsSelected.adults + this.state.guestsSelected.children + this.state.guestsSelected.infants}
+              display={this.state.guestPickerDisplayed}
+              handleClick={this.handleGuestsClick}
+              totalGuestsSelected={this.state.guestsSelected.adults + this.state.guestsSelected.children + this.state.guestsSelected.infants}
+              guestsAllowed={this.state.guestsAllowed}
+              guestsSelected={this.state.guestsSelected}
+              handleGuestPickerClick={this.changeSelectedGuests}
             />
             <CostSummary
               display={this.state.costSummaryDisplayed}
@@ -170,11 +191,6 @@ class App extends React.Component {
         <Calendar
           listingId={this.state.listingId}
           handleDateSelection={this.handleDateSelection}
-        />
-        <GuestPicker
-          guestsAllowed={this.state.guestsAllowed}
-          guestsSelected={this.state.guestsSelected}
-          handleClick={this.changeSelectedGuests}
         />
       </div>
     );
