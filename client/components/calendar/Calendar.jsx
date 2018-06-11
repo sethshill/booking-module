@@ -6,10 +6,10 @@ import CalendarHeader from './CalendarHeader.jsx';
 import CalendarTable from './CalendarTable.jsx';
 
 const OuterDiv = styled.div`
-  position: absolute;
+  display: block;
   margin: 20px 0px 20px 45px;
   font-family: Helvetica Neue,sans-serif;
-`;
+`; //position: absolute once ready to show dynamically
 
 const MainDiv = styled.div`
   position: relative;
