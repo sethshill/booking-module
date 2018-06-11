@@ -150,7 +150,9 @@ class App extends React.Component {
               startDate={this.state.selectedStartDate}
               endDate={this.state.selectedEndDate}
             />
-            <Guests />
+            <Guests
+              guestsSelected={this.state.guestsSelected.adults + this.state.guestsSelected.children + this.state.guestsSelected.infants}
+            />
             <CostSummary
               display={this.state.costSummaryDisplayed}
               listingId={this.state.listingId}
@@ -161,6 +163,7 @@ class App extends React.Component {
               serviceFeePerc={this.state.serviceFeePerc}
               occTaxRatePerc={this.state.occTaxRatePerc}
               additionalGuestFee={this.state.additionalGuestFee}
+              guestsSelected={this.state.guestsSelected.adults + this.state.guestsSelected.children}
             />
             <BookButton />
           </MainDiv>
