@@ -6,10 +6,10 @@ import CalendarHeader from './CalendarHeader.jsx';
 import CalendarTable from './CalendarTable.jsx';
 
 const OuterDiv = styled.div`
-  position: absolute;
+  display: block;
   margin: 20px 0px 20px 45px;
   font-family: Helvetica Neue,sans-serif;
-`;
+`; //position: absolute once ready to show dynamically
 
 const MainDiv = styled.div`
   position: relative;
@@ -140,7 +140,7 @@ class Calendar extends React.Component {
     }
   }
 
-  handleDateClick(e, select, date) {
+  handleDateClick(select, date) {
     if (select) {
       if (this.state.selectedStartDate === '') {
         this.setState({
@@ -149,16 +149,23 @@ class Calendar extends React.Component {
       } else {
         this.setState({
           selectedEndDate: date,
+        }, () => {
+          const fullStartDate = `${this.state.year}-${this.state.month}-${this.state.selectedStartDate}`;
+          const fullEndDate = `${this.state.year}-${this.state.month}-${this.state.selectedEndDate}`;
+          this.props.handleDateSelection(fullStartDate, fullEndDate);
         });
       }
     } else if (!select) {
-      if (this.state.selectedEndDate === '') {
+      if (!this.state.selectedEndDate) {
         this.setState({
           selectedStartDate: '',
         });
       } else {
         this.setState({
           selectedEndDate: '',
+        }, () => {
+          const fullStartDate = `${this.state.year}-${this.state.month}-${this.state.selectedStartDate}`;
+          this.props.handleDateSelection(fullStartDate, '');
         });
       }
     }
@@ -189,6 +196,7 @@ class Calendar extends React.Component {
 
 Calendar.propTypes = {
   listingId: PropTypes.number.isRequired,
+  handleDateSelection: PropTypes.func.isRequired,
 };
 
 export default Calendar;

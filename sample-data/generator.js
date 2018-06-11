@@ -90,7 +90,7 @@ for (let i = 0; i < 100; i += 1) {
 
     const potentialNextPrice = nextPrice + (getRandomInt(0, 50) * getRandomPosNeg());
     nextPrice = potentialNextPrice > 45 ? potentialNextPrice : 45;
-    nextDate.setDate(nextDate.getDate() + getRandomInt(0, 50));
+    nextDate.setDate(nextDate.getDate() + getRandomInt(10, 50));
   }
 }
 

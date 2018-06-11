@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import Picker from './Picker.jsx';
 
 const OuterDiv = styled.div`
-  position: absolute;
+  display: block;
   margin-top: 16px;
   margin-bottom: 16px;
   font-family: Helvetica Neue,sans-serif;
-`;
+`; //position: absolute once ready to show dynamically
 
 const MainDiv = styled.div`
   position: relative;
