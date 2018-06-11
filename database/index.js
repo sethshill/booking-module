@@ -15,7 +15,6 @@ module.exports.getCoreData = function getBaseDataForListing(listingId, callback)
     if (err) {
       callback(err, null);
     } else {
-      console.log(results)
       callback(null, results);
     }
   });
