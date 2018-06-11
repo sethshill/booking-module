@@ -52,7 +52,7 @@ class Calendar extends React.Component {
   }
 
   getReservedDates() {
-    const url = `/booking/availability/listingId/${this.props.listingId}/?start_date=${this.state.year}-${this.state.month + 1}-01&end_date=${this.state.year}-${this.state.month + 2}-01`;
+    const url = `/listings/${this.props.listingId}/booking/availability/?start_date=${this.state.year}-${this.state.month + 1}-01&end_date=${this.state.year}-${this.state.month + 2}-01`;
     axios.get(url)
       .then((response) => {
         this.setState({
@@ -195,7 +195,7 @@ class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-  listingId: PropTypes.number.isRequired,
+  listingId: PropTypes.string.isRequired,
   handleDateSelection: PropTypes.func.isRequired,
 };
 
