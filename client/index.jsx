@@ -121,7 +121,10 @@ class App extends React.Component {
               <Rating stars={this.state.stars} totalReviews={this.state.totalReviews} />
             </div>
             <MarginLine />
-            <Dates />
+            <Dates
+              startDate={this.state.selectedStartDate}
+              endDate={this.state.selectedEndDate}
+            />
             <Guests />
             <CostSummary
               display={this.state.costSummaryDisplayed}
