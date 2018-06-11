@@ -43,7 +43,10 @@ const GuestButtonText = styled.span`
   color: #484848
 `;
 
-const DownArrow = styled.svg`
+const Arrow = styled.svg`
+  float: right;
+  margin-right: 8px;
+  veritcal-align: middle;
   height: 16px;
   width: 16px;
   display: inline;
@@ -53,6 +56,7 @@ const DownArrow = styled.svg`
 const GuestsButton = (props) => {
   let guestText;
   let guestPicker;
+  let arrow;
 
   if (props.totalGuestsSelected > 1) {
     guestText = <GuestButtonText>{props.totalGuestsSelected} guests</GuestButtonText>;
@@ -67,8 +71,20 @@ const GuestsButton = (props) => {
       handleClick={props.handleGuestPickerClick}
       handleClose={props.handleClick}
     />);
+
+    arrow = ( // up arrow
+      <Arrow viewBox="0 0 18 18">
+        <path d="m1.71 13.71a1 1 0 1 1 -1.42-1.42l8-8a1 1 0 0 1 1.41 0l8 8a1 1 0 1 1 -1.41 1.42l-7.29-7.29z" fillRule="evenodd" />
+      </Arrow>
+    );
   } else {
     guestPicker = null;
+
+    arrow = ( // down arrow
+      <Arrow viewBox="0 0 18 18">
+        <path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fillRule="evenodd" />
+      </Arrow>
+    );
   }
 
   return (
@@ -77,9 +93,7 @@ const GuestsButton = (props) => {
       <MainBox>
         <GuestButton onClick={props.handleClick}>
           {guestText}
-          <DownArrow viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
-            <path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fillRule="evenodd" />
-          </DownArrow>
+          {arrow}
         </GuestButton>
       </MainBox>
       {guestPicker}
