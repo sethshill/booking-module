@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const MainDiv = styled.div`
@@ -48,18 +49,32 @@ const DownArrow = styled.svg`
   fill: #484848;
 `;
 
-const Guests = () => (
-  <MainDiv>
-    <Header>Guests</Header>
-    <MainBox>
-      <GuestButton>
-        <GuestButtonText>1 guest</GuestButtonText>
-        <DownArrow viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
-          <path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fillRule="evenodd" />
-        </DownArrow>
-      </GuestButton>
-    </MainBox>
-  </MainDiv>
-);
+const Guests = (props) => {
+  let guestText;
+
+  if (props.guestsSelected > 1) {
+    guestText = <GuestButtonText>{props.guestsSelected} guests</GuestButtonText>;
+  } else {
+    guestText = <GuestButtonText>1 guest</GuestButtonText>;
+  }
+
+  return (
+    <MainDiv>
+      <Header>Guests</Header>
+      <MainBox>
+        <GuestButton>
+          {guestText}
+          <DownArrow viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
+            <path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fillRule="evenodd" />
+          </DownArrow>
+        </GuestButton>
+      </MainBox>
+    </MainDiv>
+  );
+};
+
+Guests.propTypes = {
+  guestsSelected: PropTypes.number.isRequired,
+};
 
 export default Guests;
