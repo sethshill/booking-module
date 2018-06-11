@@ -4,9 +4,9 @@ const db = require('../database/index.js');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '/../public')));
+app.use('/listings/:id', express.static(path.join(__dirname, '/../public')));
 
-app.get('/booking/core/listingId/:listingId', (req, res) => {
+app.get('/listings/:listingId/booking/core', (req, res) => {
   db.getCoreData(req.params.listingId, (err, results) => {
     if (err) {
       res.send(err);
@@ -17,7 +17,7 @@ app.get('/booking/core/listingId/:listingId', (req, res) => {
 });
 
 // structure: http://localhost:3001/booking/availability/listingid/3?start_date=2018-07-01&end_date=2018-09-28
-app.get('/booking/availability/listingId/:listingId', (req, res) => {
+app.get('/listings/:listingId/booking/availability', (req, res) => {
   db.getReservationData(req.params.listingId, req.query.start_date, req.query.end_date, (err, results) => {
     if (err) {
       res.send(err);
@@ -28,7 +28,7 @@ app.get('/booking/availability/listingId/:listingId', (req, res) => {
 });
 
 // structure: http://localhost:3001/booking/pricing/listingid/3?start_date=2018-07-01&end_date=2018-09-28
-app.get('/booking/pricing/listingId/:listingId', (req, res) => {
+app.get('listings/:listingId/booking/pricing/', (req, res) => {
   db.getPricingData(req.params.listingId, req.query.start_date, req.query.end_date, (err, results) => {
     if (err) {
       res.send(err);
