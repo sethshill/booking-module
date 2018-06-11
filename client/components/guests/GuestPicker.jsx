@@ -4,15 +4,16 @@ import styled from 'styled-components';
 import Picker from './Picker.jsx';
 
 const OuterDiv = styled.div`
-  display: block;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  display: inline;
+  position: absolute;
+  z-index:1000;
+  background-color: #ffffff;
   font-family: Helvetica Neue,sans-serif;
-`; //position: absolute once ready to show dynamically
+`;
 
 const MainDiv = styled.div`
   position: relative;
-  width: 319px;
+  width: 294px;
   height: 280px;
   padding: 0px 16px;
   border: 1px solid #DBDBDB;
