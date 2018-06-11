@@ -149,6 +149,10 @@ class Calendar extends React.Component {
       } else {
         this.setState({
           selectedEndDate: date,
+        }, () => {
+          const fullStartDate = `${this.state.year}-${this.state.month}-${this.state.selectedStartDate}`;
+          const fullEndDate = `${this.state.year}-${this.state.month}-${this.state.selectedEndDate}`;
+          this.props.handleDateSelection(fullStartDate, fullEndDate);
         });
       }
     } else if (!select) {
@@ -189,6 +193,7 @@ class Calendar extends React.Component {
 
 Calendar.propTypes = {
   listingId: PropTypes.number.isRequired,
+  handleDateSelection: PropTypes.func.isRequired,
 };
 
 export default Calendar;
