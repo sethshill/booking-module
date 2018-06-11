@@ -44,10 +44,17 @@ class DateSquare extends React.Component {
 
   handleClick(e) {
     const dateClicked = e.currentTarget.textContent;
-    if (this.props.endDate === '' && (this.props.startDate === '' || parseInt(this.props.startDate) < dateClicked)) {
+
+    if (!this.state.clicked) {
+      if (!this.props.endDate && (!this.props.startDate || parseInt(this.props.startDate) < dateClicked)) {
+        this.setState({
+          clicked: true,
+        }, () => this.props.handleDateClick(true, dateClicked));
+      }
+    } else if (!this.props.endDate || parseInt(this.props.startDate) < dateClicked) {
       this.setState({
-        clicked: !this.state.clicked,
-      }, () => this.props.handleDateClick(e, this.state.clicked, dateClicked));
+        clicked: false,
+      }, () => this.props.handleDateClick(false, dateClicked));
     }
   }
 

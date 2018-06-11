@@ -100,6 +100,7 @@ class App extends React.Component {
   }
 
   handleDateSelection(startDate, endDate) {
+    console.log(startDate, endDate)
     this.setState({
       selectedStartDate: startDate,
       selectedEndDate: endDate,
@@ -136,7 +137,10 @@ class App extends React.Component {
             <BookButton />
           </MainDiv>
         </OuterDiv>
-        <Calendar listingId={this.state.listingId} handleDateSelection={this.handleDateSelection} />
+        <Calendar
+          listingId={this.state.listingId}
+          handleDateSelection={this.handleDateSelection}
+        />
       </div>
     );
   }

@@ -140,7 +140,7 @@ class Calendar extends React.Component {
     }
   }
 
-  handleDateClick(e, select, date) {
+  handleDateClick(select, date) {
     if (select) {
       if (this.state.selectedStartDate === '') {
         this.setState({
@@ -156,13 +156,16 @@ class Calendar extends React.Component {
         });
       }
     } else if (!select) {
-      if (this.state.selectedEndDate === '') {
+      if (!this.state.selectedEndDate) {
         this.setState({
           selectedStartDate: '',
         });
       } else {
         this.setState({
           selectedEndDate: '',
+        }, () => {
+          const fullStartDate = `${this.state.year}-${this.state.month}-${this.state.selectedStartDate}`;
+          this.props.handleDateSelection(fullStartDate, '');
         });
       }
     }
