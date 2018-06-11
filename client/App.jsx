@@ -118,7 +118,8 @@ class App extends React.Component {
     this.setState({ stars });
   }
 
-  handleDateClick() {
+  handleDateClick(e) {
+    e.preventDefault();
     this.setState({
       calendarDisplayed: !this.state.calendarDisplayed,
       guestPickerDisplayed: false,

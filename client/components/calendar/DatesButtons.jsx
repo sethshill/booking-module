@@ -42,7 +42,13 @@ const Input = styled.input`
   line-height: 100%;
   border: 0px;
   font-size: 17px;
-  color: #484848
+  color: transparent;
+  text-shadow: 0 0 0 #484848;
+  cursor: pointer;
+
+  &:focus{
+    outline: none;
+  }
 `;
 
 const Arrow = styled.svg`
