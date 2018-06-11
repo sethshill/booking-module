@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import PricePerNight from './components/PricePerNight.jsx';
-import Rating from './components/Rating.jsx';
-import Dates from './components/Dates.jsx';
-import Guests from './components/Guests.jsx';
-import CostSummary from './components/cost-summary/CostSummary.jsx';
+import PricePerNight from './components/booking-details/PricePerNight.jsx';
+import Rating from './components/booking-details/Rating.jsx';
+import DatesButtons from './components/calendar/DatesButtons.jsx';
+import GuestsButton from './components/guests/GuestsButton.jsx';
+import CostSummary from './components/booking-details/CostSummary.jsx';
 import BookButton from './components/BookButton.jsx';
 import GuestPicker from './components/guests/GuestPicker.jsx'
 import Calendar from './components/calendar/Calendar.jsx';
@@ -145,11 +145,11 @@ class App extends React.Component {
               <Rating stars={this.state.stars} totalReviews={this.state.totalReviews} />
             </div>
             <MarginLine />
-            <Dates
+            <DatesButtons
               startDate={this.state.selectedStartDate}
               endDate={this.state.selectedEndDate}
             />
-            <Guests
+            <GuestsButton
               guestsSelected={this.state.guestsSelected.adults + this.state.guestsSelected.children + this.state.guestsSelected.infants}
             />
             <CostSummary

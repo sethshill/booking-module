@@ -49,7 +49,7 @@ const DownArrow = styled.svg`
   fill: #484848;
 `;
 
-const Guests = (props) => {
+const GuestsButton = (props) => {
   let guestText;
 
   if (props.guestsSelected > 1) {
@@ -73,8 +73,8 @@ const Guests = (props) => {
   );
 };
 
-Guests.propTypes = {
+GuestsButton.propTypes = {
   guestsSelected: PropTypes.number.isRequired,
 };
 
-export default Guests;
+export default GuestsButton;

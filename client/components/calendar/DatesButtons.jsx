@@ -51,7 +51,7 @@ const Arrow = styled.svg`
   vertical-align: middle;
 `;
 
-const Dates = props => (
+const DatesButtons = props => (
   <MainDiv>
     <Header>Dates</Header>
     <MainBox>
@@ -66,9 +66,9 @@ const Dates = props => (
   </MainDiv>
 );
 
-Dates.propTypes = {
+DatesButtons.propTypes = {
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
 };
 
-export default Dates;
+export default DatesButtons;
