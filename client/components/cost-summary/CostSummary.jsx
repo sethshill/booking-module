@@ -22,7 +22,6 @@ class CostSummary extends React.Component {
       totalCost: 0,
     };
 
-    // this.getPrices = this.getPrices.bind(this);
     this.calculateTotals = this.calculateTotals.bind(this);
   }
 
@@ -37,17 +36,6 @@ class CostSummary extends React.Component {
       this.calculateTotals();
     }
   }
-
-  // getPrices() {
-  //   const url = `/booking/pricing/listingId/${this.props.listingId}/?start_date=${this.props.startDate}&end_date=${this.props.endDate}`;
-  //   axios.get(url)
-  //     .then((response) => {
-  //       this.setState({
-  //         prices: response.data,
-  //       }, () => this.calculateTotals());
-  //     })
-  //     .catch(error => console.log(error)); // TO DO: what is correct error handling?
-  // }
 
   calculateTotals() {
     let durationOfStay = Date.parse(this.props.endDate) - Date.parse(this.props.startDate);
@@ -96,14 +84,13 @@ class CostSummary extends React.Component {
 
 CostSummary.propTypes = {
   display: PropTypes.bool.isRequired,
-  // listingId: PropTypes.number.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
   costPerNight: PropTypes.number.isRequired,
   cleaningFee: PropTypes.number.isRequired,
   serviceFeePerc: PropTypes.number.isRequired,
   occTaxRatePerc: PropTypes.number.isRequired,
-  // additionalGuestFee: PropTypes.number.isRequired,
+  // additionalGuestFee: PropTypes.number.isRequired, --> will implement when tied into guest component
 };
 
 export default CostSummary;
