@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const CostLine = styled.div`
-
-`;
+const CostLine = styled.div``;
 
 const MarginLine = styled.div`
   margin-top: 16px;
@@ -45,6 +43,7 @@ class CostSummary extends React.Component {
     let totalCost = totalNightlyCost;
     totalCost += totalNightlyCost * this.props.serviceFeePerc;
     totalCost += totalNightlyCost * this.props.occTaxRatePerc;
+    totalCost += this.props.additionalGuestFee * (this.props.guestsSelected - 2);
     totalCost += this.props.cleaningFee;
 
     this.setState({
@@ -90,7 +89,8 @@ CostSummary.propTypes = {
   cleaningFee: PropTypes.number.isRequired,
   serviceFeePerc: PropTypes.number.isRequired,
   occTaxRatePerc: PropTypes.number.isRequired,
-  // additionalGuestFee: PropTypes.number.isRequired, --> will implement when tied into guest component
+  additionalGuestFee: PropTypes.number.isRequired,
+  guestsSelected: PropTypes.number.isRequired,
 };
 
 export default CostSummary;
