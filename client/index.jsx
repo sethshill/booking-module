@@ -8,6 +8,7 @@ import Dates from './components/Dates.jsx';
 import Guests from './components/Guests.jsx';
 import CostSummary from './components/cost-summary/CostSummary.jsx';
 import BookButton from './components/BookButton.jsx';
+import GuestPicker from './components/guests/GuestPicker.jsx'
 import Calendar from './components/calendar/Calendar.jsx';
 
 const OuterDiv = styled.div`
@@ -48,9 +49,20 @@ class App extends React.Component {
       serviceFeePerc: 0,
       occTaxRatePerc: 0,
       additionalGuestFee: 0,
+      guestsAllowed: {
+        maxAdults: 0,
+        maxChildren: 0,
+        maxInfants: 0,
+      },
+      guestsSelected: {
+        adults: 1,
+        children: 0,
+        infants: 0,
+      },
     };
 
     this.handleDateSelection = this.handleDateSelection.bind(this);
+    this.changeSelectedGuests = this.changeSelectedGuests.bind(this);
   }
 
   componentDidMount() {
@@ -69,6 +81,11 @@ class App extends React.Component {
           serviceFeePerc: listing.service_fee_perc,
           occTaxRatePerc: listing.occ_tax_rate_perc,
           additionalGuestFee: listing.additional_guest_fee,
+          guestsAllowed: {
+            maxAdults: listing.max_adults,
+            maxChildren: listing.max_children,
+            maxInfants: listing.max_infants,
+          },
         }, this.getStarArray);
       })
       .catch(error => console.log(error)); // TO DO: what is correct error handling?
@@ -100,7 +117,6 @@ class App extends React.Component {
   }
 
   handleDateSelection(startDate, endDate) {
-    console.log(startDate, endDate)
     this.setState({
       selectedStartDate: startDate,
       selectedEndDate: endDate,
@@ -108,6 +124,15 @@ class App extends React.Component {
       this.setState({
         costSummaryDisplayed: !!(this.state.selectedStartDate && this.state.selectedEndDate),
       });
+    });
+  }
+
+  changeSelectedGuests(e, type, incrementor) {
+    const guestsSelected = this.state.guestsSelected;
+    guestsSelected[type.toLowerCase()] += incrementor;
+
+    this.setState({
+      guestsSelected,
     });
   }
 
@@ -143,6 +168,11 @@ class App extends React.Component {
         <Calendar
           listingId={this.state.listingId}
           handleDateSelection={this.handleDateSelection}
+        />
+        <GuestPicker
+          guestsAllowed={this.state.guestsAllowed}
+          guestsSelected={this.state.guestsSelected}
+          handleClick={this.changeSelectedGuests}
         />
       </div>
     );
