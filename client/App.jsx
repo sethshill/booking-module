@@ -121,6 +121,8 @@ class App extends React.Component {
   handleDateClick() {
     this.setState({
       calendarDisplayed: !this.state.calendarDisplayed,
+      guestPickerDisplayed: false,
+      costSummaryDisplayed: false,
     });
   }
 
@@ -131,6 +133,8 @@ class App extends React.Component {
     }, () => {
       this.setState({
         costSummaryDisplayed: !!(this.state.selectedStartDate && this.state.selectedEndDate),
+        calendarDisplayed: !(this.state.selectedStartDate && this.state.selectedEndDate),
+        guestPickerDisplayed: !(this.state.selectedStartDate && this.state.selectedEndDate),
       });
     });
   }
@@ -138,6 +142,8 @@ class App extends React.Component {
   handleGuestsClick() {
     this.setState({
       guestPickerDisplayed: !this.state.guestPickerDisplayed,
+      calendarDisplayed: false,
+      costSummaryDisplayed: false,
     });
   }
 
@@ -161,9 +167,12 @@ class App extends React.Component {
             </div>
             <MarginLine />
             <DatesButtons
+              display={this.state.calendarDisplayed}
               handleClick={this.handleDateClick}
               startDate={this.state.selectedStartDate}
               endDate={this.state.selectedEndDate}
+              listingId={this.state.listingId}
+              handleDateSelection={this.handleDateSelection}
             />
             <GuestsButton
               display={this.state.guestPickerDisplayed}
@@ -188,10 +197,6 @@ class App extends React.Component {
             <BookButton />
           </MainDiv>
         </OuterDiv>
-        <Calendar
-          listingId={this.state.listingId}
-          handleDateSelection={this.handleDateSelection}
-        />
       </div>
     );
   }
