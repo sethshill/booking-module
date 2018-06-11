@@ -195,7 +195,7 @@ class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-  listingId: PropTypes.number.isRequired,
+  listingId: PropTypes.string.isRequired,
   handleDateSelection: PropTypes.func.isRequired,
 };
 

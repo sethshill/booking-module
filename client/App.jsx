@@ -185,7 +185,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  listingId: PropTypes.number.isRequired,
+  listingId: PropTypes.string.isRequired,
 };
 
 export default App;
