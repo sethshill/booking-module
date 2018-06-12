@@ -73,7 +73,7 @@ const priceStartDate = new Date(2018, 5, 1);
 rowNum = 1;
 
 for (let i = 0; i < 100; i += 1) {
-  const priceChangesForListing = getRandomInt(0, 10);
+  const priceChangesForListing = getRandomInt(5, 10);
   const nextDate = new Date(priceStartDate);
   let nextPrice = getRandomInt(45, 500);
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
 import PricePerNight from './components/booking-details/PricePerNight.jsx';
@@ -34,7 +35,6 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      listingId: 1,
       costPerNight: 0,
       totalReviews: 0,
       rating: 0,
@@ -71,7 +71,7 @@ class App extends React.Component {
   }
 
   getCoreData() {
-    axios.get(`/booking/core/listingId/${this.state.listingId}`)
+    axios.get(`/listings/${this.props.listingId}/booking/core`)
       .then((response) => {
         const listing = response.data[0];
         this.setState({
@@ -183,7 +183,7 @@ class App extends React.Component {
             />
             <CostSummary
               display={this.state.costSummaryDisplayed}
-              listingId={this.state.listingId}
+              listingId={this.props.listingId}
               startDate={this.state.selectedStartDate}
               endDate={this.state.selectedEndDate}
               costPerNight={this.state.costPerNight}
@@ -200,5 +200,9 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  listingId: PropTypes.string.isRequired,
+};
 
 export default App;
