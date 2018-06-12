@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Calendar from './Calendar.jsx';
 
 const MainDiv = styled.div`
   margin-top: 16px;
@@ -41,7 +42,13 @@ const Input = styled.input`
   line-height: 100%;
   border: 0px;
   font-size: 17px;
-  color: #484848
+  color: transparent;
+  text-shadow: 0 0 0 #484848;
+  cursor: pointer;
+
+  &:focus{
+    outline: none;
+  }
 `;
 
 const Arrow = styled.svg`
@@ -51,24 +58,41 @@ const Arrow = styled.svg`
   vertical-align: middle;
 `;
 
-const DatesButtons = props => (
-  <MainDiv>
-    <Header>Dates</Header>
-    <MainBox>
-      <InputBox>
-        <Input type="text" placeholder="Check In" value={props.startDate} />
-        <Arrow viewBox="0 0 24 24" focusable="false">
-          <path d="m0 12.5a.5.5 0 0 0 .5.5h21.79l-6.15 6.15a.5.5 0 1 0 .71.71l7-7v-.01a.5.5 0 0 0 .14-.35.5.5 0 0 0 -.14-.35v-.01l-7-7a .5.5 0 0 0 -.71.71l6.15 6.15h-21.79a.5.5 0 0 0 -.5.5z" fillRule="evenodd" />
-        </Arrow>
-        <Input type="text" placeholder="Check Out" value={props.endDate} />
-      </InputBox>
-    </MainBox>
-  </MainDiv>
-);
+const DatesButtons = (props) => {
+  let calendar;
+
+  if (props.display) {
+    calendar = (<Calendar
+      listingId={props.listingId}
+      handleDateSelection={props.handleDateSelection}
+    />);
+  } else {
+    calendar = null;
+  }
+
+  return (
+    <MainDiv>
+      <Header>Dates</Header>
+      <MainBox>
+        <InputBox onClick={props.handleClick}>
+          <Input type="text" placeholder="Check In" value={props.startDate} />
+          <Arrow viewBox="0 0 24 24" focusable="false">
+            <path d="m0 12.5a.5.5 0 0 0 .5.5h21.79l-6.15 6.15a.5.5 0 1 0 .71.71l7-7v-.01a.5.5 0 0 0 .14-.35.5.5 0 0 0 -.14-.35v-.01l-7-7a .5.5 0 0 0 -.71.71l6.15 6.15h-21.79a.5.5 0 0 0 -.5.5z" fillRule="evenodd" />
+          </Arrow>
+          <Input type="text" placeholder="Check Out" value={props.endDate} />
+        </InputBox>
+      </MainBox>
+      {calendar}
+    </MainDiv>);
+};
 
 DatesButtons.propTypes = {
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
+  display: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  listingId: PropTypes.number.isRequired,
+  handleDateSelection: PropTypes.func.isRequired,
 };
 
 export default DatesButtons;

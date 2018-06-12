@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import GuestPicker from './GuestPicker.jsx';
 
 const MainDiv = styled.div`
   margin-top: 16px;
@@ -42,7 +43,10 @@ const GuestButtonText = styled.span`
   color: #484848
 `;
 
-const DownArrow = styled.svg`
+const Arrow = styled.svg`
+  float: right;
+  margin-right: 8px;
+  veritcal-align: middle;
   height: 16px;
   width: 16px;
   display: inline;
@@ -51,30 +55,67 @@ const DownArrow = styled.svg`
 
 const GuestsButton = (props) => {
   let guestText;
+  let guestPicker;
+  let arrow;
 
-  if (props.guestsSelected > 1) {
-    guestText = <GuestButtonText>{props.guestsSelected} guests</GuestButtonText>;
+  if (props.totalGuestsSelected > 1) {
+    guestText = <GuestButtonText>{props.totalGuestsSelected} guests</GuestButtonText>;
   } else {
     guestText = <GuestButtonText>1 guest</GuestButtonText>;
+  }
+
+  if (props.display) {
+    guestPicker = (<GuestPicker
+      guestsAllowed={props.guestsAllowed}
+      guestsSelected={props.guestsSelected}
+      handleClick={props.handleGuestPickerClick}
+      handleClose={props.handleClick}
+    />);
+
+    arrow = ( // up arrow
+      <Arrow viewBox="0 0 18 18">
+        <path d="m1.71 13.71a1 1 0 1 1 -1.42-1.42l8-8a1 1 0 0 1 1.41 0l8 8a1 1 0 1 1 -1.41 1.42l-7.29-7.29z" fillRule="evenodd" />
+      </Arrow>
+    );
+  } else {
+    guestPicker = null;
+
+    arrow = ( // down arrow
+      <Arrow viewBox="0 0 18 18">
+        <path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fillRule="evenodd" />
+      </Arrow>
+    );
   }
 
   return (
     <MainDiv>
       <Header>Guests</Header>
       <MainBox>
-        <GuestButton>
+        <GuestButton onClick={props.handleClick}>
           {guestText}
-          <DownArrow viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false">
-            <path d="m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z" fillRule="evenodd" />
-          </DownArrow>
+          {arrow}
         </GuestButton>
       </MainBox>
+      {guestPicker}
     </MainDiv>
   );
 };
 
 GuestsButton.propTypes = {
-  guestsSelected: PropTypes.number.isRequired,
+  display: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  totalGuestsSelected: PropTypes.number.isRequired,
+  guestsAllowed: PropTypes.shape({
+    maxAdults: PropTypes.number.isRequired,
+    maxChildren: PropTypes.number.isRequired,
+    maxInfants: PropTypes.number.isRequired,
+  }).isRequired,
+  guestsSelected: PropTypes.shape({
+    adults: PropTypes.number.isRequired,
+    children: PropTypes.number.isRequired,
+    infants: PropTypes.number.isRequired,
+  }).isRequired,
+  handleGuestPickerClick: PropTypes.func.isRequired,
 };
 
 export default GuestsButton;
