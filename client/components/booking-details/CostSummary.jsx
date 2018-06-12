@@ -110,7 +110,7 @@ class CostSummary extends React.Component {
           <MarginLine />
           <TotalLine>
             <Heading>Total</Heading>
-            <Price>${this.state.totalCost}</Price>
+            <Price>${Math.round(this.state.totalCost)}</Price>
           </TotalLine>
         </MainDiv>
       );
