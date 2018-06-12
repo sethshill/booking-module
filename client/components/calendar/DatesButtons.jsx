@@ -91,7 +91,7 @@ DatesButtons.propTypes = {
   endDate: PropTypes.string.isRequired,
   display: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
-  listingId: PropTypes.number.isRequired,
+  listingId: PropTypes.string.isRequired,
   handleDateSelection: PropTypes.func.isRequired,
 };
 
