@@ -15,7 +15,7 @@
 1. [Development](#development)
 
 ## Usage
-s
+
 > Some usage instructions
 
 ## Requirements
@@ -40,3 +40,5 @@ mysql -u root < sample-data/schema.sql
 node sample-data/generator.js
 npm run start-server
 ```
+
+Navigate to http://localhost:3001/listings/1/ in your browser.  Any id from 1 - 100 is valid!
