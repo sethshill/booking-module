@@ -170,7 +170,7 @@ class App extends React.Component {
               handleClick={this.handleDateClick}
               startDate={this.state.selectedStartDate}
               endDate={this.state.selectedEndDate}
-              listingId={this.state.listingId}
+              listingId={this.props.listingId}
               handleDateSelection={this.handleDateSelection}
             />
             <GuestsButton
