@@ -8,7 +8,7 @@ const getRandomInt = function getRandomIntegerBetweenValues(min, max) {
 
 const getRandomDecimal = function getRandomDecimalBetweenValues(min, max, decimalPlace) {
   const rand = (Math.random() * (max - min)) + min;
-  const power = 10 ** decimalPlace;
+  const power = Math.pow(10, decimalPlace);
   return Math.floor(rand * power) / power;
 };
 
