@@ -11,7 +11,9 @@
     "react-dev": "webpack -d --watch",
     "start-server": "node server/index.js",
     "test": "jest --forceExit",
-    "build": "webpack"
+    "build": "webpack",
+    "create-mock-data": "node sample-data/generator.js",
+    "docker": "npm run create-mock-data && npm run start-server"
   },
   "dependencies": {
     "axios": "^0.18.0",

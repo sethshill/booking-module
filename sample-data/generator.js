@@ -106,3 +106,4 @@ console.log(`${dailyPrices.length} daily prices loaded!`);
 
 console.log('all sample data generated');
 
+setTimeout(insertHelpers.closeConnection, 5000);

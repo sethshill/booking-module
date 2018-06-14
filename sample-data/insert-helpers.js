@@ -1,9 +1,6 @@
 const mysql = require('mysql');
 
-const config = {
-  user: 'root',
-  database: 'project_nomad_booking',
-};
+const config = require('../database/config.js');
 
 const connection = mysql.createConnection(config);
 connection.connect();
@@ -42,6 +39,10 @@ module.exports = {
         console.log(err);
       }
     });
+  },
+
+  closeConnection: () => {
+    connection.close();
   },
 
 };
