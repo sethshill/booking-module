@@ -42,7 +42,7 @@ module.exports = {
   },
 
   closeConnection: () => {
-    connection.close();
+    connection.end();
   },
 
 };
