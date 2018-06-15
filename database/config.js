@@ -1,7 +1,8 @@
 module.exports = {
-  host: process.env.DATABASE_HOST || '127.0.0.1',
+  host: 'project-nomad-booking-database.cu7qqwkudqle.us-west-1.rds.amazonaws.com',
   database: 'project_nomad_booking',
-  user: 'booking-service',
-  password: '1234',
+  user: 'booking_service',
+  password: 'password',
   port: 3306,
+  timeout: 60000,
 };

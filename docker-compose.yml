@@ -5,10 +5,10 @@ services:
         build: .
         ports:
             - '3001:3001'
-        depends_on:
-            - database
-        environment:
-            - DATABASE_HOST=database
+    #     depends_on:
+    #         - database
+    #     environment:
+    #         - DATABASE_HOST=database
 
-    database:
-        build: ./sample-data
+    # database:
+    #     build: ./sample-data

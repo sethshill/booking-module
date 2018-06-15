@@ -13,4 +13,4 @@ RUN npm install --production
 EXPOSE 3001
 
 # How do you start your app?
-CMD npm run docker
+CMD npm run start-server
