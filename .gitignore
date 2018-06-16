@@ -24,8 +24,3 @@ coverage
 build/
 dist/
 public/bundle-booking.js
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
