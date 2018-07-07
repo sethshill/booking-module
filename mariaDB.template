@@ -1,0 +1,130 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Parameters"               : {
+        "InstanceTypeParameter" : {
+            "Type" : "String",
+            "Default" : "t2.micro",
+            "AllowedValues" : [
+                "t2.nano",
+                "t2.micro"
+            ]
+        },
+        "EC2KeyParameter"       : {
+            "Type" : "String",
+            "Default" : "EC2Key"
+        },
+        "SSH"                   : {
+            "Type" : "String",
+            "Default" : "True",
+            "AllowedValues" : [
+                "True",
+                "False"
+            ]
+        },
+        "MySQLUsernameParameter" : {
+            "Type" : "String",
+            "Default" : "username"
+        },
+        "MySQLPasswordParameter" : {
+            "Type" : "String",
+            "Default" : "password"
+        },
+        "LatestAMI"              : {
+            "Type" : "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+            "Default" : "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+        }
+    },
+    "Conditions"               : {
+        "isSSH" : {
+            "Fn::Equals" : [
+                {
+                    "Ref" : "SSH"
+                },
+                "True"
+            ]
+        }
+    },
+    "Resources"                : {
+        "EC2SecurityGroup" : {
+            "Type" : "AWS::EC2::SecurityGroup",
+            "Properties" : {
+                "GroupDescription" : "MariaDB",
+                "SecurityGroupIngress" : [
+                    {
+                        "IpProtocol" : "tcp",
+                        "FromPort"   : "3306",
+                        "ToPort"     : "3306",
+                        "CidrIp"     : "0.0.0.0/0"
+                    },
+                    {
+                        "Fn::If" : [
+                            "isSSH",
+                            {
+                                "IpProtocol" : "tcp",
+                                "FromPort"   : "22",
+                                "ToPort"     : "22",
+                                "CidrIp"     : "0.0.0.0/0"
+                            },
+                            {
+                                "Ref" : "AWS::NoValue"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "EC2Instance"      : {
+            "Type" : "AWS::EC2::Instance",
+            "Properties" : {
+                "KeyName" : {
+                    "Fn::If" : [
+                        "isSSH",
+                        {
+                            "Ref" : "EC2KeyParameter"
+                        },
+                        {
+                            "Ref" : "AWS::NoValue"
+                        }
+                    ]
+                },
+                "ImageId" : {
+                    "Ref" : "LatestAMI"
+                },
+                "SecurityGroups" : [
+                    {
+                        "Ref" : "EC2SecurityGroup"
+                    }
+                ],
+                "InstanceType"   : {
+                    "Ref" : "InstanceTypeParameter"
+                },
+                "UserData"       : {
+                    "Fn::Base64" : {
+                        "Fn::Join" : [
+                            "",
+                            [
+                                "#!/bin/bash\n",
+                                "yum install mariadb-server -y\n",
+                                "systemctl enable mariadb\n",
+                                "systemctl start mariadb\n",
+                                {
+                                    "Fn::Sub" : "mysql -e \"GRANT ALL ON *.* TO '${MySQLUsernameParameter}'@'%' IDENTIFIED BY '${MySQLPasswordParameter}'\"\n"
+                                }
+                            ]
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "Outputs"                  : {
+        "IPAddress" : {
+            "Value" : {
+                "Fn::GetAtt" : [
+                    "EC2Instance",
+                    "PublicIp"
+                ]
+            }
+        }
+    }
+}

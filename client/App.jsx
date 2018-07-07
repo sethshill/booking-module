@@ -155,6 +155,10 @@ class App extends React.Component {
     });
   }
 
+  createBooking() {
+    // creates reservation with given details
+  }
+
   render() {
     return (
       <div>

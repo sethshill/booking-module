@@ -6,7 +6,7 @@ CREATE DATABASE project_nomad_booking;
 USE project_nomad_booking;
 
 CREATE TABLE listings (
-  id int PRIMARY KEY,
+  id int PRIMARY KEY AUTO_INCREMENT,
   avg_rating decimal (3, 2),
   review_count int NOT NULL,
   max_adults int NOT NULL,
@@ -19,14 +19,14 @@ CREATE TABLE listings (
 );
 
 CREATE TABLE reservations (
-  id int PRIMARY KEY,
+  id int PRIMARY KEY AUTO_INCREMENT,
   listing_id int NOT NULL,
   start_date date NOT NULL,
   end_date date NOT NULL
 );
 
 CREATE TABLE listing_daily_prices (
-  id int PRIMARY KEY,
+  id int PRIMARY KEY AUTO_INCREMENT,
   listing_id int NOT NULL,
   cost_per_night decimal(10, 2) NOT NULL,
   start_date date NOT NULL
