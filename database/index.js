@@ -67,3 +67,17 @@ module.exports.getPricingData = function getPricingDataForDateRange(listingId, s
     }
   });
 };
+
+module.exports.deleteReservation = function deleteReservation(listingId, reservationId, callback) {
+  const query = `DELETE id
+    FROM reservations
+    WHERE  listing_id = ${ listingId };`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};

@@ -13,6 +13,8 @@ app.get('/listings/:listingId/booking/core', (req, res) => {
       res.send(err);
     } else {
       res.header('Access-Control-Allow-Origin', '*');
+      // console.log("Got here!");
+      console.log("Results: ", results);
       res.status(200).send(results);
     }
   });
@@ -33,6 +35,17 @@ app.get('/listings/:listingId/booking/availability', (req, res) => {
 // structure: http://localhost:3001/booking/pricing/listingid/3?start_date=2018-07-01&end_date=2018-09-28
 app.get('listings/:listingId/booking/pricing/', (req, res) => {
   db.getPricingData(req.params.listingId, req.query.start_date, req.query.end_date, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.status(200).send(results);
+    }
+  });
+});
+
+app.delete('/listings/:listingId/booking/delete/', (req, res) => {
+  db.deleteReservation(req.params.listingId, req.params.reservationId, (err, results) => {
     if (err) {
       res.send(err);
     } else {

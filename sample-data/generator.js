@@ -1,8 +1,8 @@
-// run: node sample-data/generator.js
+// run: node sample-data/or.js
 const insertHelpers = require('./insert-helpers');
 
 // helpers
-const getRandomInt = function getRandomIntegerBetweenValues(min, max) {
+const getRansdomInt = function getRandomIntegerBetweenValues(min, max) {
   return Math.floor(Math.random() * ((max - min) + 1)) + min;
 };
 
@@ -25,7 +25,7 @@ const getDateString = function getDateStringForSQLInsertion(date) {
 };
 
 
-// generating listings
+// ing listings
 const listings = [];
 for (let i = 0; i < 100; i += 1) {
   const row = [];
@@ -44,7 +44,7 @@ for (let i = 0; i < 100; i += 1) {
   listings.push(row);
 }
 
-// generate reservations
+// e reservations
 const reservations = [];
 const startDate = new Date(2018, 5, 15);
 
@@ -67,7 +67,7 @@ for (let i = 0; i < 100; i += 1) {
   }
 }
 
-// generate daily prices
+// e daily prices
 const dailyPrices = [];
 const priceStartDate = new Date(2018, 5, 1);
 rowNum = 1;
@@ -104,6 +104,6 @@ console.log(`${reservations.length} reservations loaded!`);
 dailyPrices.forEach(price => insertHelpers.insertPrice(price));
 console.log(`${dailyPrices.length} daily prices loaded!`);
 
-console.log('all sample data generated');
+console.log('all sample data ed');
 
 setTimeout(insertHelpers.closeConnection, 3000);

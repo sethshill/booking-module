@@ -8,6 +8,7 @@ import DatesButtons from './components/calendar/DatesButtons.jsx';
 import GuestsButton from './components/guests/GuestsButton.jsx';
 import CostSummary from './components/booking-details/CostSummary.jsx';
 import BookButton from './components/BookButton.jsx';
+import DeleteButton from './components/DeleteButton.jsx';
 
 const OuterDiv = styled.div`
   width: 376px;
@@ -58,6 +59,7 @@ class App extends React.Component {
       calendarDisplayed: false,
       guestPickerDisplayed: false,
       costSummaryDisplayed: false,
+      reservationId: null
     };
 
     this.handleDateClick = this.handleDateClick.bind(this);
@@ -157,6 +159,17 @@ class App extends React.Component {
 
   createBooking() {
     // creates reservation with given details
+    // afterwards update the state with new booking id
+  }
+
+  cancelBooking(listingId, reservationId) {
+    console.log("reservation id: ", reservationId);
+    // deletes reservation
+    // axios.delete('/listings/:listingId/:reservationId/booking/delete/')
+    //   .then((response) => {
+
+    //   })
+    //   .catch(error => console.log(error)); // TO DO: what is correct error handling?
   }
 
   render() {
@@ -198,6 +211,10 @@ class App extends React.Component {
               guestsSelected={this.state.guestsSelected.adults + this.state.guestsSelected.children}
             />
             <BookButton />
+            <DeleteButton
+              handleClick={this.cancelBooking}
+              listingId={this.props.listingId}
+            />
           </MainDiv>
         </OuterDiv>
       </div>
