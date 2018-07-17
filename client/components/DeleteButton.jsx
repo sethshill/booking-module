@@ -25,7 +25,7 @@ const Button = styled.button`
 `;
 
 const DeleteButton = (props) => (
-  <Button onClick={ () => props.handleClick(props.listingId, props.reservationId) }>DELETE</Button>
+  <Button onClick={ () => props.handleClick() }>DELETE</Button>
 );
 
 export default DeleteButton;

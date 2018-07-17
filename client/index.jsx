@@ -5,6 +5,6 @@ import App from './App.jsx';
 // const listingId = window.location.pathname.split('/')[2];
 
 // hardcode listing id for now
-const listingId = '200';
+const listingId = '2';
 
 ReactDOM.render(<App listingId={listingId} />, document.getElementById('booking-module'));

@@ -68,10 +68,10 @@ module.exports.getPricingData = function getPricingDataForDateRange(listingId, s
   });
 };
 
-module.exports.deleteReservation = function deleteReservation(listingId, reservationId, callback) {
-  const query = `DELETE id
+module.exports.deleteReservation = function deleteReservation(reservationId, callback) {
+  const query = `DELETE
     FROM reservations
-    WHERE  listing_id = ${ listingId };`;
+    WHERE  id = ${ reservationId };`;
 
   connection.query(query, (err, results) => {
     if (err) {
