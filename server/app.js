@@ -13,8 +13,7 @@ app.get('/listings/:listingId/booking/core', (req, res) => {
       res.send(err);
     } else {
       res.header('Access-Control-Allow-Origin', '*');
-      // console.log("Got here!");
-      console.log("Results: ", results);
+      // console.log("Results: ", results);
       res.status(200).send(results);
     }
   });
