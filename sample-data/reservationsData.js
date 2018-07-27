@@ -10,6 +10,7 @@ let listings = [];
 let reservations = [];
 let listing_daily_prices = [];
 
+let idx = 0;
 for (let i = 1; i < (numListings + 1); i++) {
   let listing = {
     "id": i,
@@ -48,15 +49,30 @@ for (let i = 1; i < (numListings + 1); i++) {
     date.setDate(date.getDate() + 1);
     endDate = formatDate(date);
 
-    let reservation = {
+    const reservation = {
+      "id": idx,
       "listingId": i,
       "start_date": startDate,
       "end_date": endDate
     };
     reservations.push(reservation);
+
+    const listingDailyPrice = {
+      "id": idx,
+      "listing_id": i,
+      "cost_per_night": faker.random.number({
+        'min': 0,
+        'max': 500,
+        'precision': 0.01
+      }),
+      "start_date": startDate
+    };
+    listing_daily_prices.push(listingDailyPrice);
+    idx++;
   }
 }
-console.log('Reservations: ', reservations);
+// console.log('Reservations: ', reservations);
+console.log('listing_daily_prices: ', listing_daily_prices)
 // let date = new Date();
 // date.setDate(date.getDate() + 1);
 // let formattedDate = (date) => {
