@@ -18,26 +18,31 @@ const insertListing = (values, callback) => {
   const sql = 'INSERT INTO listings (avg_rating, review_count, max_adults, max_children, max_infants, cleaning_fee, service_fee_perc, occ_tax_rate_perc, additional_guest_fee) VALUES(?,?,?,?,?,?,?,?,?)';
   const params = [values.avgRating, values.reviewCount, values.maxAdults, values.maxChildren, values.maxInfants, values.cleaningFee, values.serviceFeePerc, values.occTaxRatePerc, values.additionalGuestFee];
   con.query(sql, params, (err, result) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, result);
-    }
+    if (err) callback(err, null);
+    else callback(null, result);
   });
 };
 
 const insertReservation = (values, callback) => {
-  const sql = '';
-  const params = [];
+  const sql = 'INSERT INTO reservations (listing_id, start_date, end_date) VALUES (?,?,?)';
+  const params = [values.listingId, values.startDate, values.endDate];
   con.query(sql, params, (err, result) => {
     if (err) callback(err, null);
-    else {
-      callback(null, result);
-    }
+    else callback(null, result);
+  });
+};
+
+const insertDailyPrices = (values, callback) => {
+  const sql = 'INSERT INTO listing_daily_prices (listing_id, cost_per_night, start_date) VALUES (?,?,?)';
+  const params = [values.listingId, values.costPerNight, values.startDate];
+  con.query(sql, params, (err, result) => {
+    if (err) callback(err, null);
+    else callback(null, result);
   });
 };
 
 module.exports = {
   insertListing,
   insertReservation,
+  insertDailyPrices,
 };
