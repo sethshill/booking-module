@@ -14,10 +14,9 @@ con.connect((err) => {
   console.log('Connected!');
 });
 
-const insertListing = (avgRating, callback) => {
-  // let sql = "INSERT INTO listings (avg_rating,) VALUES(?,?,?,?,?,?,?,?,?)";
-  const sql = 'INSERT INTO listings (avg_rating) VALUES(?)';
-  const params = [avgRating];
+const insertListing = (values, callback) => {
+  const sql = 'INSERT INTO listings (avg_rating, review_count, max_adults, max_children, max_infants, cleaning_fee, service_fee_perc, occ_tax_rate_perc, additional_guest_fee) VALUES(?,?,?,?,?,?,?,?,?)';
+  const params = [values.avgRating, values.reviewCount, values.maxAdults, values.maxChildren, values.maxInfants, values.cleaningFee, values.serviceFeePerc, values.occTaxRatePerc, values.additionalGuestFee];
   con.query(sql, params, (err, result) => {
     if (err) {
       callback(err, null);
@@ -27,6 +26,18 @@ const insertListing = (avgRating, callback) => {
   });
 };
 
+const insertReservation = (values, callback) => {
+  const sql = '';
+  const params = [];
+  con.query(sql, params, (err, result) => {
+    if (err) callback(err, null);
+    else {
+      callback(null, result);
+    }
+  });
+};
+
 module.exports = {
-  insertListing: insertListing
+  insertListing,
+  insertReservation,
 };

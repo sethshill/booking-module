@@ -71,7 +71,7 @@ for (let i = 1; i < (numListings + 1); i++) {
     idx++;
   }
 }
-// console.log('Reservations: ', reservations);
+console.log('Reservations: ', reservations);
 console.log('listing_daily_prices: ', listing_daily_prices)
 // let date = new Date();
 // date.setDate(date.getDate() + 1);
