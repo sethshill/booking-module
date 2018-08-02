@@ -4,12 +4,12 @@
 const faker = require('faker');
 const db = require('./dataGenHelpers');
 
-
-const today = new Date();
-
 // Iterate for 100 iterations (make 100 listings)
-const numListings = 1;
+const numListings = 100000;
 let idx = 0;
+
+// Keep track of time
+const startTime = Date.now();
 
 for (let i = 1; i < (numListings + 1); i += 1) {
   const listing = {
@@ -45,8 +45,8 @@ for (let i = 1; i < (numListings + 1); i += 1) {
   });
 
   // assume up to 100 reservations per listing
-  // const numReservationsPerListing = faker.random.number(100);
-  const numReservationsPerListing = 250;
+  const numReservationsPerListing = faker.random.number(100);
+  const today = new Date();
   let startDate;
   let endDate;
   const formatDate = date => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -78,12 +78,15 @@ for (let i = 1; i < (numListings + 1); i += 1) {
         precision: 0.01,
       }),
       startDate,
+
     };
 
     db.insertDailyPrices(listingDailyPrice, (err, result) => {
       if (err) {
         console.log(err);
       } else {
+        // let timePassed = Date.now() - startTime;
+        console.log('Time passed (ms): ', timePassed);
         // console.log('Result is: ', result);
       }
     });
