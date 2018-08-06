@@ -5,7 +5,7 @@ const faker = require('faker');
 const db = require('./dataGenHelpers');
 
 // Iterate for 100 iterations (make 100 listings)
-const numListings = 100000;
+const numListings = 100;
 let idx = 0;
 
 // Keep track of time
@@ -86,7 +86,7 @@ for (let i = 1; i < (numListings + 1); i += 1) {
         console.log(err);
       } else {
         // let timePassed = Date.now() - startTime;
-        console.log('Time passed (ms): ', timePassed);
+        // console.log('Time passed (ms): ', timePassed);
         // console.log('Result is: ', result);
       }
     });

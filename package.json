@@ -13,6 +13,7 @@
     "test": "jest --forceExit",
     "build": "webpack",
     "create-mock-data": "node sample-data/generator.js",
+    "create-cooler-mock-data": "node sample-data/dataGenerator.js",
     "docker": "npm run create-mock-data && npm run start-server"
   },
   "dependencies": {
