@@ -59,7 +59,7 @@ class App extends React.Component {
       calendarDisplayed: false,
       guestPickerDisplayed: false,
       costSummaryDisplayed: false,
-      reservationId: 6101, // assume this listing has at least 1 reservation, and its id is 1
+      reservationId: 1, // assume this listing has at least 1 reservation, and its id is 1
     };
 
     this.handleDateClick = this.handleDateClick.bind(this);
