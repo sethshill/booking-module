@@ -43,8 +43,8 @@ app.get('listings/:listingId/booking/pricing/', (req, res) => {
   });
 });
 
-app.delete('/reservations/:reservationId/booking/delete/', (req, res) => {
-  db.deleteReservation(req.params.reservationId, (err, results) => {
+app.delete('/reservations/:listingId/booking/delete/', (req, res) => {
+  db.deleteReservation(req.params.listingId, (err, results) => {
     if (err) {
       res.send(err);
     } else {

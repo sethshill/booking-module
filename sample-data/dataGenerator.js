@@ -5,7 +5,7 @@ const faker = require('faker');
 const db = require('./dataGenHelpers');
 
 // Set Constants
-const numListings = 1000000;
+const numListings = 1000;
 const today = new Date();
 
 // Define functions
@@ -13,8 +13,8 @@ const formatDate = date => `${date.getFullYear()}-${date.getMonth() + 1}-${date.
 
 const makeReservation = (foreignId, todaysDate) => {
   // assume up to 100 reservations per listing
-  // const numReservationsPerListing = faker.random.number(1000);
-  const numReservationsPerListing = 0;
+  const numReservationsPerListing = faker.random.number(10);
+  // const numReservationsPerListing = 0;
   for (let j = 0; j < numReservationsPerListing; j += 1) {
     let startDate = formatDate(todaysDate);
     todaysDate.setDate(todaysDate.getDate() + 1);
@@ -37,7 +37,7 @@ const makeReservation = (foreignId, todaysDate) => {
 };
 
 const makeDailyPrices = (foreignKey, currentDay) => {
-  const daysOut = 0;
+  const daysOut = 180;
   for (let i = 0; i < daysOut; i+=1) {
     const listingDailyPrice = {
       listingId: foreignKey,

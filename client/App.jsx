@@ -59,7 +59,6 @@ class App extends React.Component {
       calendarDisplayed: false,
       guestPickerDisplayed: false,
       costSummaryDisplayed: false,
-      reservationId: 1, // assume this listing has at least 1 reservation, and its id is 1
     };
 
     this.handleDateClick = this.handleDateClick.bind(this);
@@ -158,21 +157,13 @@ class App extends React.Component {
     });
   }
 
-  createBooking() {
-    // creates reservation with given details
-    // afterwards update the state with new booking id
-  }
-
   cancelBooking() {
-    // deletes reservation
-    // console.log("reservation id: ", this.state.reservationId);
-    axios.delete(`/reservations/${this.state.reservationId}/booking/delete/`)
+    console.log(this.props.listingId);
+    axios.delete(`/reservations/${this.props.listingId}/booking/delete/`)
       .then((response) => {
+        // placeholder
       })
       .catch(error => console.log(error)); // TO DO: what is correct error handling?
-    this.setState({
-      reservationId: null
-    })
   }
 
   render() {
