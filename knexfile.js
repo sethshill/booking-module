@@ -27,7 +27,7 @@ module.exports = {
   connection: {
     user: 'root',
     password: '',
-    databased: 'project_nomad_booking',
+    database: 'project_nomad_booking',
   },
   migrations: { directory: path.join(__dirname, '/db/migrations') },
   seeds: { directory: path.join(__dirname, '/db/seeds') },
