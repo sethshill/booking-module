@@ -1,5 +1,6 @@
 
 exports.up = async function (knex, Promise) {
+
   await knex.schema.dropTableIfExists('listings').dropTableIfExists('reservations').dropTableIfExists('listing_daily_prices');
   return knex.schema.createTable('listings', (t) => {
     t.increments('id');
@@ -10,7 +11,7 @@ exports.up = async function (knex, Promise) {
     t.integer('max_infants');
     t.decimal('cleaning_fee', 10, 2);
     t.decimal('service_fee_perc', 3, 2);
-    t.decimal('occ_tax_rate_per', 3, 2);
+    t.decimal('occ_tax_rate_perc', 3, 2);
     t.decimal('additional_guest_fee', 10, 2);
   })
 
