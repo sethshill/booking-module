@@ -1,16 +1,27 @@
 const faker = require('faker');
+// Set Constants
+// const numListings = 100000;
+const numListings = 1000;
+// const factor = 50;
+const today = new Date();
+
+// Define functions
+const formatDate = date => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
+// while iterations < factor
+//  make a promise for X # of iterations
+//  add promise to promiseAll
+// when all promises completed
+// complete seeding
 
 exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
-  return knex('listings').del()
-    .then(function () {
-      // Inserts seed entries
-      // return knex('listings').insert([
-      //   {id: 1, name: 'test1'},
-      //   {id: 2, name: 'test2'},
-      //   {id: 3, name: 'test2'}
-      // ]);
-      const numListings = 1000;
+  return Promise.join(
+    knex('listings').del(),
+    knex('reservations').del(),
+    knex('listing_daily_prices').del()
+    .then(() => {
+      console.log('a log to check how often this completes');
       let listings = [];
       for (let i = 0; i < numListings; i += 1) {
         const listing = {
@@ -40,10 +51,51 @@ exports.seed = function (knex, Promise) {
             precision: 0.01,
           }),
         };
-
         listings.push(listing);
       }
       return knex('listings').insert(listings);
     }
   )
-};
+  .then(() => {
+    let reservations = [];
+    for (let i = 1; i < numListings + 1; i += 1) {
+      // assume up to 10 reservations per listing
+      const numReservationsPerListing = faker.random.number(10);
+      // const numReservationsPerListing = 0;
+      for (let j = 0; j < numReservationsPerListing; j += 1) {
+        let start_date = formatDate(today);
+        today.setDate(today.getDate() + 1);
+        let end_date = formatDate(today);
+
+        const reservation = {
+          listing_id: i,
+          start_date,
+          end_date,
+        };
+        reservations.push(reservation);
+      }
+    };
+    return knex('reservations').insert(reservations);
+  })
+  .then(() => {
+    const daysOut = 90;
+    let listingDailyPrices = [];
+    for (let i = 1; i < numListings + 1; i += 1) {
+      let today = new Date();
+      for (let j = 0; j < daysOut; j += 1) {
+        let listingDailyPrice = {
+          listing_id: i,
+          cost_per_night: faker.random.number({
+            min: 0,
+            max: 500,
+            precision: 0.01,
+          }),
+          start_date: formatDate(today),
+        };
+        today.setDate(today.getDate() + 1);
+        listingDailyPrices.push(listingDailyPrice);
+      }
+    }
+    return knex('listing_daily_prices').insert(listingDailyPrices);
+  })
+)};
