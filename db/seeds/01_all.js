@@ -1,7 +1,7 @@
 const faker = require('faker');
 const path = require('path');
 // Set Constants
-const numListings = 100000;
+const numListings = 1000000;
 const subset = 1000;
 let today = new Date();
 
